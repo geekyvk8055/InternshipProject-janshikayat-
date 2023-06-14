@@ -13,4 +13,4 @@ const CounterCatMppingComp = () => {
   )
 }
 
-export default CounterCatMppingComp
+export default CounterCatMppingComp;
