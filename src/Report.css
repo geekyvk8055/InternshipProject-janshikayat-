@@ -1,0 +1,201 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Josefin+Sans:wght@100&family=Laila:wght@500&display=swap');
+
+#report{
+    font-family: 'Baloo 2', cursive;
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Laila', sans-serif;
+
+} */
+
+/* baseFontSize: 16px !default;
+
+break-xsmall: 480px !default;
+break-small: 640px !default;
+break-medium: 800px !default;
+$break-large: 960px !default;
+$break-xlarge: 1024px !default;
+$maxContentWidth: 1400px !default; */
+
+/* @mixin respond-to($media) {
+    @if $media == xsmall-only {
+        @media only screen and (max-width: $break-xsmall) {
+            @content;
+        }
+    }
+    @else if $media == small {
+        @media only screen and (min-width: $break-xsmall + 1) {
+            @content;
+        }
+    }
+    @else if $media == small-only {
+        @media only screen and (min-width: $break-xsmall + 1) and (max-width: $break-small) {
+            @content;
+        }
+    }
+    @else if $media == small-down {
+        @media only screen and (max-width: $break-small) {
+            @content;
+        }
+    }
+    @else if $media == medium {
+        @media only screen and (min-width: $break-small + 1) {
+            @content;
+        }
+    }
+    @else if $media == medium-only {
+        @media only screen and (min-width: $break-small + 1) and (max-width: $break-medium) {
+            @content;
+        }
+    }
+    @else if $media == medium-down {
+        @media only screen and (max-width: $break-medium) {
+            @content;
+        }
+    }
+    @else if $media == large {
+        @media only screen and (min-width: $break-medium + 1) {
+            @content;
+        }
+    }
+    @else if $media == large-only {
+        @media only screen and (min-width: $break-medium + 1) and (max-width: $break-large) {
+            @content;
+        }
+    }
+    @else if $media == large-down {
+        @media only screen and (max-width: $break-large) {
+            @content;
+        }
+    }
+    @else if $media == xlarge {
+        @media only screen and (min-width: $break-large + 1) {
+            @content;
+        }
+    }
+    @else if $media == xlarge-down {
+        @media only screen and (max-width: $break-xlarge) {
+            @content;
+        }
+    }
+    @else if $media == above-maxwidth {
+        @media only screen and (min-width: $maxContentWidth + 32px + 1) {
+            @content;
+        }
+    }
+    @else if $media == print {
+        @media only print {
+            @content;
+        }
+    }
+}
+@mixin visually-hidden() {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px;
+} */
+
+/* html,
+body {
+  margin: 0;
+  padding: 0;
+} */
+
+.container1 {
+  align-items: center;
+  background-image: linear-gradient(135deg, tomato, rebeccapurple);
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  height: 100vh;
+  justify-content: center;
+}
+
+.container1 {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 3px 12px 1px rgba(0, 0, 0, 0.3);
+  color: #333;
+  padding: 1rem 1.5rem;
+  width: 90%;
+
+  @include respond-to(large) {
+    width: auto;
+  }
+}
+
+h1 {
+  font-weight: 100;
+}
+
+table {
+  border: 1px solid #333;
+  border-collapse: collapse;
+}
+
+thead {
+  border-bottom: 1px solid #ccc;
+}
+
+thead tr {
+  background-color: #f2f2f2;
+}
+
+th,
+td {
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+}
+
+@include respond-to(medium-down) {
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  thead tr {
+    @include visually-hidden;
+  }
+
+  tr {
+    & + tr {
+      margin-top: 2rem;
+    }
+    &::after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    float: right;
+    width: 100%;
+
+    &::before {
+      content: attr(data-column-label);
+      display: inline-block;
+      font-weight: 600;
+      padding-right: 10px;
+      width: calc(50% - 10px);
+    }
+
+    span {
+      display: block;
+      float: right;
+      width: 50%;
+    }
+  }
+}

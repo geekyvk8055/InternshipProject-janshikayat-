@@ -1,0 +1,26 @@
+.marquee {
+    position: relative;
+    height: 52vh;
+    overflow: hidden;
+  }
+  
+  .marquee  {
+    position: absolute;
+    white-space: nowrap;
+    top: 0;
+    left: 0;
+    
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+  
+  .marquee:hover  {
+    animation-play-state:running;
+  }

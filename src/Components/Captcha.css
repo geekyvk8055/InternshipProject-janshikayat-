@@ -1,0 +1,19 @@
+.card1 {
+    width: 350px;
+    height: 220px;
+  }
+  
+  .h4 {
+    color: #fff;
+    text-decoration: line-through;
+    user-select: none;
+    background-color: black;
+    border-radius: 5px;
+    width: 100px;
+    height: 35px;
+    font-size: 22px;
+    margin-bottom: 7px;
+    text-align: center;
+    letter-spacing: 4px;
+    
+  }
