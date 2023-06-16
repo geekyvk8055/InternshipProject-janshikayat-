@@ -18,6 +18,10 @@ const UserDashboard = () => {
   const [selectedApplicant, setSelectedApplicant] = useState([]);
   const [applicantPassword, setApplicantPassword] = useState([]);
   const [applicantEmail, setApplicantEmail] = useState([]);
+  const [subject, setSubject] = useState([]);
+
+ 
+
 
   useEffect(() => {
     const fetchstates = async () => {
@@ -50,21 +54,7 @@ const UserDashboard = () => {
   }, []);
 
   const handleSubmit = async (event) => {
-    // const datafromapi = {
-    //   "applicant_name": "vinod",
-    //   "applicant_add": "narayanpur",
-    //   "applicant_dist": "11",
-    //   "applicant_distname": "raipur",
-    //   "applicant_state": "22",
-    //   "applicant_mobile": "78946123",
-    //   "registration_date": "2020-01-02",
-    //   "application_cat": "self",
-    //   "client_ip": "",
-    //   "verify": "y",
-    //   "password": "12345",
-    //   "user_id": "vinod",
-    //   "email_id": "vy848481@gmail.com"
-    // }
+   
     event.preventDefault();
 
     try {
@@ -174,8 +164,30 @@ const UserDashboard = () => {
                         <h6 style={{ color: "red", textAlign: "center" }}>
                           * चिन्ह वाले सभी भागो को भरना अनिवार्य है |
                         </h6>
-                        <Row>
+                        
+                        
+                         आवेदन दर्ज करें :   <input
+                            type="radio"
+                            name="category"
+                            value="self"
+
+                            /> स्वयं के लिए
+                          
+                            &nbsp;&nbsp;
+                            
+                             <input
+                            type="radio"
+                            name="category"
+                            value="others"
+
+                            /> अन्य  के लिए 
+                          
+                        <br />
+                        <br />
+
+                          <Row>
                           <Col sm={7}>
+                         
                             <Form.Group className="require">
                               <Form.Label>
                                 आवेदक का नाम
@@ -191,10 +203,13 @@ const UserDashboard = () => {
                               />
                             </Form.Group>
                           </Col>
+                         
+
+                         
                           <Col md={5}>
                             <Form.Group>
                               <Form.Label for="email">
-                                Email<span style={{ color: "red" }}>*</span>
+                                आवेदक का मोबाईल नंबर <span style={{ color: "red" }}>*</span>
                               </Form.Label>
                               <Form.Control
                                 value={applicantEmail}
@@ -204,7 +219,7 @@ const UserDashboard = () => {
                                 type="email"
                                 class="form-control"
                                 name="email"
-                                placeholder="Enter your email."
+                                placeholder="Enter your mobile."
                                 required
                               />
                             </Form.Group>
@@ -212,27 +227,6 @@ const UserDashboard = () => {
                         </Row>
                         <br />
                         <Row>
-                          <Col md={6}>
-                            <Form.Label for="cod">
-                              आवेदक श्रेणी
-                              <span style={{ color: "red" }}>*</span>{" "}
-                            </Form.Label>
-                            <Form.Select
-                              class="form-control browser-default custom-select"
-                              value={selectedApplicant}
-                              onChange={(event) =>
-                                setSelectedApplicant(event.target.value)
-                              }
-                            >
-                              <option selected>आवेदक श्रेणी चुनें</option>
-
-                              {applicantCat.map((ac) => (
-                                <option key={ac.cat_id} value={ac.cat_id}>
-                                  {ac.cat_name}
-                                </option>
-                              ))}
-                            </Form.Select>
-                          </Col>
                           <Col md={6}>
                             <Form.Label for="address-1">
                               पता<span style={{ color: "red" }}>*</span>{" "}
@@ -250,6 +244,27 @@ const UserDashboard = () => {
                               placeholder="Locality/House/Street no."
                               required
                             />
+
+
+                          </Col>
+                          <Col md={6}>
+                            
+                            <Form.Label for="State">राज्य </Form.Label>
+                            <Form.Select
+                              class="form-control custom-select browser-default"
+                              value={selectedState}
+                              onChange={(event) =>
+                                setSelectedState(event.target.value)
+                              }
+                            >
+                              <option selected="selected">select state</option>
+                              {state.map((st) => (
+                                <option key={st.value} value={st.value}>
+                                  {st.name}
+                                </option>
+                              ))}
+                            </Form.Select>
+                           
                           </Col>
                         </Row>
                         <br />
@@ -272,21 +287,31 @@ const UserDashboard = () => {
                                 </option>
                               ))}
                             </Form.Select>
+
+
+                            
                           </Col>
 
                           <Col md={6}>
-                            <Form.Label for="State">राज्य </Form.Label>
+
+
+                          
+                             <Form.Label for="cod">
+                              आवेदक श्रेणी
+                              <span style={{ color: "red" }}>*</span>{" "}
+                            </Form.Label>
                             <Form.Select
-                              class="form-control custom-select browser-default"
-                              value={selectedState}
+                              class="form-control browser-default custom-select"
+                              value={selectedApplicant}
                               onChange={(event) =>
-                                setSelectedState(event.target.value)
+                                setSelectedApplicant(event.target.value)
                               }
                             >
-                              <option selected="selected">select state</option>
-                              {state.map((st) => (
-                                <option key={st.value} value={st.value}>
-                                  {st.name}
+                              <option selected>आवेदक श्रेणी चुनें</option>
+
+                              {applicantCat.map((ac) => (
+                                <option key={ac.cat_id} value={ac.cat_id}>
+                                  {ac.cat_name}
                                 </option>
                               ))}
                             </Form.Select>
@@ -295,72 +320,51 @@ const UserDashboard = () => {
                         <br />
 
                         <Row>
-                          <Col md={6}>
-                            <Form.Label for="tel">Phone </Form.Label>
+                          <Col md={12}>
+                             <Form.Label for="address-1">
+                              विषय 
+                              <span style={{ color: "red" }}>*</span>{" "}
+                            </Form.Label>
                             <Form.Control
-                              value={applicantMob}
-                              onChange={(event) =>
-                                setApplicantMob(event.target.value)
-                              }
-                              type="tel"
-                              name="phone"
+                              as="textarea"
+                              aria-label="With textarea"
+                            style={{height:'200px'}}
+                              type="address"
                               class="form-control"
-                              id="tel"
-                              placeholder="Enter Your Contact Number."
-                              required
-                            />
-                          </Col>
+                              
+                             value={subject}
+                             onChange={  (event) =>
+                             setSubject(event.target.value)
 
-                          <Col md={6}>
-                            <Form.Label for="tel">यूजर आइडी </Form.Label>
-                            <Form.Control
-                              value={applicantId}
-                              onChange={(event) =>
-                                setApplicantId(event.target.value)
-                              }
-                              type="tel"
-                              name="phone"
-                              class="form-control"
-                              placeholder="Create Your User ID."
+                             }
+                             
                               required
                             />
+                            <span style={{color:'maroon'}}>बचे हुए अक्षर :-{1800-subject.length} </span>
+                             
                           </Col>
                         </Row>
 
                         <br />
-                        <Row>
-                          <Col md={6}>
-                            <label for="pass">Password</label>
-                            <input
-                              value={applicantPassword}
-                              onChange={(event) =>
-                                setApplicantPassword(event.target.value)
-                              }
-                              type="Password"
-                              name="password"
-                              class="form-control"
-                              id="pass"
-                              placeholder="Enter your password."
-                              required
-                            />
-                          </Col>
-                          <Col md={6}>
-                            <Form.Group>
-                              <Form.Label htmlFor="inputPassword5">
-                                Confirm Password
-                              </Form.Label>
-                              <Form.Control
-                                // value={ver}
-                                type="password"
-                                id="inputPassword5"
-                                aria-describedby="passwordHelpBlock"
-                                placeholder="Re-enter your password."
-                                required
-                              />
-                            </Form.Group>
-                          </Col>
-                        </Row>
+                         क्या आप फाइल अपलोड करना चाहते हैं  :   <input
+                            type="radio"
+                            name="category"
+                            value="self"
+
+                            /> No
+                          
+                            &nbsp;&nbsp;
+                            
+                             <input
+                            type="radio"
+                            name="category"
+                            value="others"
+
+                            /> Yes
+                       
                         <br />
+                        <br />
+
                         <Col md={12} class=" text-center">
                           <Button onClick={handleSubmit}>Register</Button>
                         </Col>
