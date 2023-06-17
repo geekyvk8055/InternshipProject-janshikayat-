@@ -33,6 +33,7 @@ import SectionComp from "./SectionComp";
 import CounterAlloteComp from "./CounterAlloteComp";
 import UserDashboardComp from "./UserDashboardComp";
 import CounterCatMppingComp from "./CounterCatMppingComp";
+import UserApplicationDetailComp from "./UserApplicationDetailComp";
 
 //import AdminRouting from "./AdminRouting";
 
@@ -63,6 +64,8 @@ const App = () => {
       <Route path="/admin/counter_allotement" element={<CounterAlloteComp />} />
       <Route path="/user/dashboard" element={<UserDashboardComp />} />
       <Route path="/admin/countercat_mapping" element={<CounterCatMppingComp />} />
+      <Route path="/user/applicant_detail" element={<UserApplicationDetailComp />} />
+
 
 
       

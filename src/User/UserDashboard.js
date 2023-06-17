@@ -19,6 +19,11 @@ const UserDashboard = () => {
   const [applicantPassword, setApplicantPassword] = useState([]);
   const [applicantEmail, setApplicantEmail] = useState([]);
   const [subject, setSubject] = useState([]);
+  const [selfCategory, setSelfCategory] = useState();
+  const [selectedSelfcategory, setSelectedSelefcategory] = useState();
+  const [otherscategory,setOtherscategory] = useState();
+  const [selectedOtherscategory, setSelectedOtherscategory] = useState();
+
 
  
 
@@ -46,7 +51,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchapplicant = async () => {
       const response = await axios.get(
-        "https://localhost:44333/api/UserLogin/Getapplicant"
+        "https://localhost:44333/api/Master/getappcat"
       );
       setApplicantCat(response.data.table);
     };
@@ -59,21 +64,32 @@ const UserDashboard = () => {
 
     try {
       const response = await axios.post(
-        "https://localhost:44333/api/Master/registration",
+        "https://localhost:44333/api/userApplication/userapplication",
         {
-          applicant_name: applicantName,
-          applicant_add: applicantAdd,
-          applicant_dist: selectedDistrict,
-          applicant_distname: "",
-          applicant_state: selectedState,
-          applicant_mobile: applicantMob,
-          registration_date: "2020-01-01",
-          application_cat: selectedApplicant,
+          applicant_dist_id: selectedDistrict,
+          year: "2020",
+          name: applicantName,
+          address: applicantAdd,
+          subject: subject,
+          date_jandarshan: "2020-10-10",
+          category: selectedApplicant,
+          updated: "Y",
+          country_code: "91",
+          state_code: selectedState,
+          file_uploaded: "Y",
           client_ip: "",
-          verify: "y",
-          password: applicantPassword,
-          user_id: applicantId,
-          email_id: applicantEmail,
+          user_id: "",
+          accepted: "Y",
+          new_application_district: "",
+          new_forworded_district: "",
+          applicant_state_id: selectedState,
+          app_cat_id: selectedApplicant,
+          entry_date: "2020-10-10",
+          applicant_dist_name: "",
+          reason: "",
+          mode: "",
+          applied_for: selfCategory,
+          random_no: ""
         }
       );
       // console.log({datafromapi});
@@ -107,13 +123,13 @@ const UserDashboard = () => {
                 </div>
                 <ul className="adminList">
                   <li>
-                    <NavLink to="/getLogin" style={{ textDecoration: "none" }}>
+                    <NavLink to="/user/dashboard" style={{ textDecoration: "none" }}>
                       शिकायत पंजीयन 
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/createCounter"
+                      to="/user/applicant_detail"
                       style={{ textDecoration: "none" }}
                     >
                       आवेदन विवरण 
@@ -169,7 +185,9 @@ const UserDashboard = () => {
                          आवेदन दर्ज करें :   <input
                             type="radio"
                             name="category"
-                            value="self"
+                            value="1"
+                            checked={selfCategory===1}
+                            onChange={(event) => setSelfCategory(event.target.value)}
 
                             /> स्वयं के लिए
                           
@@ -178,7 +196,9 @@ const UserDashboard = () => {
                              <input
                             type="radio"
                             name="category"
-                            value="others"
+                            value="2"
+                            //  checked={selfCategory===2}
+                            //  onChange={(event) =>setSelfCategory(event.target.value)}
 
                             /> अन्य  के लिए 
                           
@@ -212,10 +232,10 @@ const UserDashboard = () => {
                                 आवेदक का मोबाईल नंबर <span style={{ color: "red" }}>*</span>
                               </Form.Label>
                               <Form.Control
-                                value={applicantEmail}
-                                onChange={(event) =>
-                                  setApplicantEmail(event.target.value)
-                                }
+                                // value={applicantEmail}
+                                // onChange={(event) =>
+                                //   setApplicantEmail(event.target.value)
+                                // }
                                 type="email"
                                 class="form-control"
                                 name="email"
@@ -310,8 +330,8 @@ const UserDashboard = () => {
                               <option selected>आवेदक श्रेणी चुनें</option>
 
                               {applicantCat.map((ac) => (
-                                <option key={ac.cat_id} value={ac.cat_id}>
-                                  {ac.cat_name}
+                                <option key={ac.appCategoryID} value={ac.appCategoryID}>
+                                  {ac.appCategoryName}
                                 </option>
                               ))}
                             </Form.Select>
