@@ -1,4 +1,5 @@
 .adminList{
-    list-style-type:circle;
+    list-style-type:none;
     list-style-position:inside;           
 }
+

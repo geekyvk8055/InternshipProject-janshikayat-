@@ -91,29 +91,37 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Container fluid>
-        <Row className="m-3">
-          <Col md={12} style={{ background: "whitesmoke" }}>
+      <Container  fluid style={{ background: "whitesmoke"}}>
+      
+        <Row >
+          <Col md={12} style={{ justifyContent:'center',margin:'auto',alignContent:'center',alignItems:'center'}}>
             <Row>
-              <Col md={3} style={{}}>
+              <Col md={3}>
+             
                 <h3
                   className="text-center"
                   style={{
                     background: "red",
                     alignItems: "center",
                     justifyContent: "center",
-                    borderRadius: "5px",
+                    borderTopLeftRadius:'10px',
+                    borderTopRightRadius:'10px',
+                  
+
                   }}
                 >
                   Admin Menu
                 </h3>
+                <div style={{border:'2px solid red'}}>
                 <ul className="adminList">
                   <li>
-                    <NavLink to="/getLogin" style={{ textDecoration: "none" }}>
+                    <NavLink to="/getLogin">
+              
                       Create Counter Location
                     </NavLink>
                   </li>
-                  <li>
+                  <br />
+                  <li >
                     <NavLink
                       to="/createCounter"
                       style={{ textDecoration: "none" }}
@@ -121,6 +129,7 @@ const AdminPanel = () => {
                       Create Counter
                     </NavLink>
                   </li>
+                  <br />
                   <li>
                     <NavLink
                       to="/CreateOffice"
@@ -129,6 +138,7 @@ const AdminPanel = () => {
                       Create Office
                     </NavLink>
                   </li>
+                  <br />
                   <li>
                     <NavLink
                       to="/createOfficeLevel"
@@ -137,7 +147,7 @@ const AdminPanel = () => {
                       Create Office Level
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/createEmployee"
@@ -146,7 +156,7 @@ const AdminPanel = () => {
                       Create Employee
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/alloteEmployeeOffice"
@@ -156,7 +166,7 @@ const AdminPanel = () => {
                       Allote Employee Office Or section
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/alloteOfficeRole"
@@ -165,7 +175,7 @@ const AdminPanel = () => {
                       Allote Employee Office/Section Role
                     </NavLink>
                   </li>
-
+                  <br />
                  
                   <li>
                     <NavLink
@@ -175,7 +185,7 @@ const AdminPanel = () => {
                       Create Employee Password
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/admin/ResetEmplPwd"
@@ -184,7 +194,7 @@ const AdminPanel = () => {
                        Reset Employee Password
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/admin/Section"
@@ -194,7 +204,7 @@ const AdminPanel = () => {
                     </NavLink>
                   </li>
 
-
+                  <br />
                   <li>
                     <NavLink
                       to="/admin/counter_allotement"
@@ -203,7 +213,7 @@ const AdminPanel = () => {
                        Allote Counter To User
                     </NavLink>
                   </li>
-
+                  <br />
                   <li>
                     <NavLink
                       to="/admin/countercat_mapping"
@@ -212,12 +222,14 @@ const AdminPanel = () => {
                        Counter Category Mapping
                     </NavLink>
                   </li>
-
+                  <br />
                 </ul>
+                </div>
               </Col>
              
+             
               <Col
-                md={9}
+                md={8}
                 style={{ borderRadius: "3px", border: "1px solid black" }}
               >
                 <Row>
@@ -225,7 +237,9 @@ const AdminPanel = () => {
                   <Form.Label>
                     आवेदन की स्थिति हेतु आवेदन नंबर डालें :{" "}
                   </Form.Label>
+                  
                   <Col md={6}>
+                  आवेदन की स्थिति हेतु आवेदन नंबर डालें :{" "}
                     <Form.Group>
                       <Form.Control
                        type="number"
@@ -324,6 +338,7 @@ const AdminPanel = () => {
             </Row>
           </Col>
         </Row>
+        
       </Container>
     </>
   );

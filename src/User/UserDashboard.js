@@ -4,36 +4,47 @@ import { NavLink } from "react-router-dom";
 import { BucketFill } from "react-bootstrap-icons";
 import axios from "axios";
 import { set } from "react-hook-form";
+import { useLocation } from "react-router-dom";
+//import LoginandNotice from './Homepage/LoginandNotice'
 
-const UserDashboard = () => {
+const UserDashboard = (props) => {
+  const location = useLocation();
   const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
   const [distrct, setDistrict] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [applicantId, setApplicantId] = useState([]);
-  const [applicantName, setApplicantName] = useState([]);
-  const [applicantAdd, setApplicantAdd] = useState([]);
-  const [applicantMob, setApplicantMob] = useState([]);
+  const [applicantName, setApplicantName] = useState("");
+  const [applicantAdd, setApplicantAdd] = useState("");
+  const [applicantMob, setApplicantMob] = useState("");
   const [applicantCat, setApplicantCat] = useState([]);
   const [selectedApplicant, setSelectedApplicant] = useState([]);
   const [applicantPassword, setApplicantPassword] = useState([]);
   const [applicantEmail, setApplicantEmail] = useState([]);
   const [subject, setSubject] = useState([]);
-  const [selfCategory, setSelfCategory] = useState();
-  const [selectedSelfcategory, setSelectedSelefcategory] = useState();
-  const [otherscategory,setOtherscategory] = useState();
-  const [selectedOtherscategory, setSelectedOtherscategory] = useState();
+  const [selfCategory, setSelfCategory] = useState('');
+  const [pwd, setPwd] = useState("");
+  const [uname, setUname] = useState("");
+
+  
 
 
  
+ const handlenameChange = (e) =>{
+  setApplicantName(e.target.value)
+ }
 
-
+// useEffect(()=>
+// {
+//   fetchinfo(location.state.userData.password);
+// },[])
   useEffect(() => {
     const fetchstates = async () => {
       const response = await axios.get(
         "https://localhost:44333/api/Master/GetState"
       );
       setState(response.data);
+      
     };
     fetchstates();
   }, []);
@@ -47,6 +58,42 @@ const UserDashboard = () => {
     };
     fetchdistrict();
   }, []);
+
+
+
+useEffect( () => {
+  if(selfCategory==="1"){
+    setPwd(location?.state?.userData?.password);
+
+  }else{
+    setPwd(null);
+  }
+    
+}
+);
+
+  const fetchinfo = async () => {
+    const response = await axios.get(
+      `https://localhost:44333/api/Master/getuserpass/${pwd}`
+    );
+    if(selfCategory==="1"){
+    setApplicantName(response.data?.table?.[0]?.applicant_name);
+    setApplicantMob(response.data?.table?.[0]?.mobile_no);
+    setApplicantAdd(response.data?.table?.[0]?.applicant_address);
+    setSelectedDistrict(response.data?.table?.[0]?.applicant_district);
+    setSelectedState(response.data?.table?.[0]?.applicant_state);
+
+
+
+    }else{setApplicantName("");
+          setApplicantMob("");
+          setApplicantAdd(""); 
+        }
+    console.log(response.data.table[0].applicant_name);
+  };
+  
+
+ 
 
   useEffect(() => {
     const fetchapplicant = async () => {
@@ -98,7 +145,8 @@ const UserDashboard = () => {
       console.log(error); // handle error
     }
   };
-
+console.log(selfCategory);
+console.log(location);
   return (
     <>
       <Container >
@@ -186,7 +234,7 @@ const UserDashboard = () => {
                             type="radio"
                             name="category"
                             value="1"
-                            checked={selfCategory===1}
+                            checked={selfCategory === "1"}
                             onChange={(event) => setSelfCategory(event.target.value)}
 
                             /> स्वयं के लिए
@@ -197,8 +245,8 @@ const UserDashboard = () => {
                             type="radio"
                             name="category"
                             value="2"
-                            //  checked={selfCategory===2}
-                            //  onChange={(event) =>setSelfCategory(event.target.value)}
+                            checked={selfCategory === "2"}
+                            onChange={(event) =>setSelfCategory(event.target.value)}
 
                             /> अन्य  के लिए 
                           
@@ -211,13 +259,11 @@ const UserDashboard = () => {
                             <Form.Group className="require">
                               <Form.Label>
                                 आवेदक का नाम
-                                <span style={{ color: "red" }}>*</span> :{" "}
+                                <span style={{ color: "red" }}>*</span> :
                               </Form.Label>
                               <Form.Control
                                 value={applicantName}
-                                onChange={(event) =>
-                                  setApplicantName(event.target.value)
-                                }
+                                onChange={handlenameChange}
                                 placeholder="Enter your name."
                                 required
                               />
@@ -232,10 +278,10 @@ const UserDashboard = () => {
                                 आवेदक का मोबाईल नंबर <span style={{ color: "red" }}>*</span>
                               </Form.Label>
                               <Form.Control
-                                // value={applicantEmail}
-                                // onChange={(event) =>
-                                //   setApplicantEmail(event.target.value)
-                                // }
+                                 value={applicantMob}
+                                 onChange={(event) =>
+                                   applicantMob(event.target.value)
+                                 }
                                 type="email"
                                 class="form-control"
                                 name="email"
@@ -278,11 +324,11 @@ const UserDashboard = () => {
                               }
                             >
                               <option selected="selected">select state</option>
-                              {state.map((st) => (
+                               {state.map((st) => (
                                 <option key={st.value} value={st.value}>
                                   {st.name}
                                 </option>
-                              ))}
+                              ))} 
                             </Form.Select>
                            
                           </Col>

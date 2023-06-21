@@ -4,6 +4,8 @@ import { Row, Col, Container, ListGroup, Card,Toast } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { usehistory } from "react-router-dom";
 import axios from "axios";
+import bcrypt from 'bcryptjs';
+import CryptoJS from "crypto-js";
 
 import DataTable from "react-data-table-component";
 import {
@@ -18,39 +20,51 @@ import {
 import { useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import {withRouter} from "react-router-dom"
-const Reports = (props) => {
+const Reports = () => {
   const randomString = Math.random().toString(36).slice(8);
   const [captcha, setCaptcha] = useState(randomString);
   const [text, setText] = useState("");
   const [valid, setValid] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [username, setUsername] = useState([]);
-  const [password, setPassword] = useState([]);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  
  
   
 
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(password)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+   
 
     try {
       const response = await axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`);
       const userData = response.data.table[0];
+      
+      //const storedHashedPassword = userData.password;
+      //const enteredEncryptedPassword = CryptoJS.SHA256(password).toString();
+
+     // var salt = bcrypt.genSaltSync(10);
+      //var hash = bcrypt.hashSync(password, salt);
+      //const hashedPassword = await bcrypt.hash(password, 10);
+      //console.log(storedHashedPassword);
+      //console.log(enteredEncryptedPassword);
+      
+      //const passwordMatch = await  bcrypt.compareSync(hash, storedHashedPassword);
+      
       if (userData.password === password) {
         console.log('Login successful!');
-        console.log('User data:', userData);
         
         // Redirect to the dashboard page
-        navigate('/user/dashboard');
+  navigate('/user/dashboard', {state:{userData},});
+        
       } else {
         alert('invalid username or password');
         
       }
 
-      setUsername('');
-      setPassword('');
+     
     } catch (error) {
       console.log('Login failed:', error);
     }
@@ -90,8 +104,8 @@ const Reports = (props) => {
     setCaptcha(Math.random().toString(36).slice(8));
   };
 
-  const matchCaptcha = (event) => {
-    event.preventDefault();
+  const matchCaptcha = (e) => {
+    e.preventDefault();
     if (text === captcha) {
       setValid(false);
       setSuccess(true);
@@ -204,12 +218,13 @@ const Reports = (props) => {
                           
                             <h3 class="signin-text mb-3"> Sign In</h3>
                             
-                            <form>
+                            <form >
                               <div class="form-group">
                                 <label for="UserId">UserId</label>
                                 <input
                                   name="username"
                                   class="form-control"
+                                  value={username}
                                   onChange={(e) => setUsername(e.target.value)}
                                 />
                               </div>
@@ -219,6 +234,7 @@ const Reports = (props) => {
                                   name="password"
                                   type="password"
                                   class="form-control"
+                                  value={password}
                                   onChange={(e) => setPassword(e.target.value)}
                                 />
 
@@ -243,7 +259,7 @@ const Reports = (props) => {
                                     <br></br> */}
 
                                 <Button
-                                  onClick={handleSubmit}
+                                   onClick={handleSubmit}
                                   variant="contained"
                                   color="success"
                                   

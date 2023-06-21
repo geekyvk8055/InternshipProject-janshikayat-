@@ -2,6 +2,7 @@ import React from "react";
 import './Components/Loginform.css';
 import "./menubar.css";
 import "./index.css";
+import './Admin/AdminPanel.css'
 // import "./Login_page/Login.css";
 import "./Report.css";
 import "./Charts.css";

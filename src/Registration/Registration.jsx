@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import { BucketFill } from "react-bootstrap-icons";
 import axios from "axios";
+import bcrypt from 'bcryptjs'
 import { set } from "react-hook-form";
+import CryptoJS from "crypto-js";
 
 const Registration = () => {
   const [state, setState] = useState([]);
@@ -50,27 +52,15 @@ const Registration = () => {
   }, []);
 
 
-
+const currentdate = new Date();
   const handleSubmit = async (event) => {
-    // const datafromapi = {
-    //   "applicant_name": "vinod",
-    //   "applicant_add": "narayanpur",
-    //   "applicant_dist": "11",
-    //   "applicant_distname": "raipur",
-    //   "applicant_state": "22",
-    //   "applicant_mobile": "78946123",
-    //   "registration_date": "2020-01-02",
-    //   "application_cat": "self",
-    //   "client_ip": "",
-    //   "verify": "y",
-    //   "password": "12345",
-    //   "user_id": "vinod",
-    //   "email_id": "vy848481@gmail.com"
-    // }
-    event.preventDefault();
    
+    event.preventDefault();
+   // const hashedPassword = await bcrypt.hash(applicantPassword, 10);
 
     try {
+      //const encryptedPassword = CryptoJS.AES.encrypt(applicantPassword, '7654321').toString();
+
       const response = await axios.post(
         "https://localhost:44333/api/Master/registration",
         {
@@ -81,7 +71,7 @@ const Registration = () => {
       applicant_distname: "",
       applicant_state: selectedState,
       applicant_mobile: applicantMob,
-      registration_date: "2020-01-01",
+      registration_date: currentdate,
       application_cat: selectedApplicant,
       client_ip: "",
       verify: "y",
