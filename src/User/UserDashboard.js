@@ -23,28 +23,33 @@ const UserDashboard = (props) => {
   const [applicantEmail, setApplicantEmail] = useState([]);
   const [subject, setSubject] = useState([]);
   const [selfCategory, setSelfCategory] = useState('');
-  const [pwd, setPwd] = useState("");
-  const [uname, setUname] = useState("");
-
-  
+  const [pwd, setPwd] = useState();
+  const[selectedUpload, setSelectedUpload] = useState('');
 
 
- 
- const handlenameChange = (e) =>{
-  setApplicantName(e.target.value)
- }
 
-// useEffect(()=>
-// {
-//   fetchinfo(location.state.userData.password);
-// },[])
+
+
+  const handlenameChange = (e) => {
+    setApplicantName(e.target.value)
+  }
+
+   const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    // Perform file upload logic
+    console.log('Uploading file:', file);
+  };
+
+  // useEffect(() => {
+  //   fetchinfo();
+  // }, []);
   useEffect(() => {
     const fetchstates = async () => {
       const response = await axios.get(
         "https://localhost:44333/api/Master/GetState"
       );
       setState(response.data);
-      
+
     };
     fetchstates();
   }, []);
@@ -61,39 +66,38 @@ const UserDashboard = (props) => {
 
 
 
-useEffect( () => {
-  if(selfCategory==="1"){
-    setPwd(location?.state?.userData?.password);
+  useEffect(() => {
+    if (selfCategory === "1") {
+      setPwd(location?.state?.userData?.password);
 
-  }else{
-    setPwd(null);
-  }
-    
-}
-);
+    } else {
+      setPwd(null);
+    }
 
+  }, []
+  );
+  useEffect ( () => {
   const fetchinfo = async () => {
-    const response = await axios.get(
-      `https://localhost:44333/api/Master/getuserpass/${pwd}`
-    );
-    if(selfCategory==="1"){
-    setApplicantName(response.data?.table?.[0]?.applicant_name);
-    setApplicantMob(response.data?.table?.[0]?.mobile_no);
-    setApplicantAdd(response.data?.table?.[0]?.applicant_address);
-    setSelectedDistrict(response.data?.table?.[0]?.applicant_district);
-    setSelectedState(response.data?.table?.[0]?.applicant_state);
+    console.log(pwd)
 
-
-
-    }else{setApplicantName("");
-          setApplicantMob("");
-          setApplicantAdd(""); 
-        }
-    console.log(response.data.table[0].applicant_name);
+    const response = await axios.get(`https://localhost:44333/api/Master/getuserpass/${pwd}`);
+    if (selfCategory === "1") {
+      setApplicantName(response.data?.table?.[0]?.applicant_name);
+      setApplicantMob(response.data?.table?.[0]?.mobile_no);
+      setApplicantAdd(response.data?.table?.[0]?.applicant_address);
+      setSelectedDistrict(response.data?.table?.[0]?.applicant_district);
+      setSelectedState(response.data?.table?.[0]?.applicant_state);
+    } else {
+      setApplicantName("");
+      setApplicantMob("");
+      setApplicantAdd("");
+    }
+    console.log(pwd);
   };
-  
+},[]);
 
- 
+
+
 
   useEffect(() => {
     const fetchapplicant = async () => {
@@ -106,7 +110,7 @@ useEffect( () => {
   }, []);
 
   const handleSubmit = async (event) => {
-   
+
     event.preventDefault();
 
     try {
@@ -123,7 +127,7 @@ useEffect( () => {
           updated: "Y",
           country_code: "91",
           state_code: selectedState,
-          file_uploaded: "Y",
+          file_uploaded: selectedUpload,
           client_ip: "",
           user_id: "",
           accepted: "Y",
@@ -145,34 +149,34 @@ useEffect( () => {
       console.log(error); // handle error
     }
   };
-console.log(selfCategory);
-console.log(location);
+  console.log(selfCategory);
+  console.log(location);
   return (
     <>
       <Container >
         <Row>
           <Col md={12}>
             <Row>
-              <Col md={4} style={{marginTop:'25px'}}>
-              <div style={{
-                    background: "red",
-                    //alignItems: "center",
-                    //justifyContent: "center",
-                    borderRadius: "5px",
-                    height:'35px'
-                  }}>
-                <h5
-                  className="text-center"
-                  style={{alignItems:'center', justifyContent:'center'}}
-                  
-                >
-                  ऑनलईन जनशिकायत 
-                </h5>
+              <Col md={4} style={{ marginTop: '25px' }}>
+                <div style={{
+                  background: "red",
+                  //alignItems: "center",
+                  //justifyContent: "center",
+                  borderRadius: "5px",
+                  height: '35px'
+                }}>
+                  <h5
+                    className="text-center"
+                    style={{ alignItems: 'center', justifyContent: 'center' }}
+
+                  >
+                    ऑनलईन जनशिकायत
+                  </h5>
                 </div>
                 <ul className="adminList">
                   <li>
                     <NavLink to="/user/dashboard" style={{ textDecoration: "none" }}>
-                      शिकायत पंजीयन 
+                      शिकायत पंजीयन
                     </NavLink>
                   </li>
                   <li>
@@ -180,7 +184,7 @@ console.log(location);
                       to="/user/applicant_detail"
                       style={{ textDecoration: "none" }}
                     >
-                      आवेदन विवरण 
+                      आवेदन विवरण
                     </NavLink>
                   </li>
                 </ul>
@@ -220,7 +224,7 @@ console.log(location);
                               style={{ fontWeight: "bolder" }}
                             >
                               <i style={{ color: "#6F1E1A" }}>
-                                आवेदक / आवेदन  का वर्णन 
+                                आवेदक / आवेदन  का वर्णन
                               </i>
                             </h4>
                           </Col>
@@ -228,34 +232,34 @@ console.log(location);
                         <h6 style={{ color: "red", textAlign: "center" }}>
                           * चिन्ह वाले सभी भागो को भरना अनिवार्य है |
                         </h6>
-                        
-                        
-                         आवेदन दर्ज करें :   <input
-                            type="radio"
-                            name="category"
-                            value="1"
-                            checked={selfCategory === "1"}
-                            onChange={(event) => setSelfCategory(event.target.value)}
 
-                            /> स्वयं के लिए
-                          
-                            &nbsp;&nbsp;
-                            
-                             <input
-                            type="radio"
-                            name="category"
-                            value="2"
-                            checked={selfCategory === "2"}
-                            onChange={(event) =>setSelfCategory(event.target.value)}
 
-                            /> अन्य  के लिए 
-                          
+                        आवेदन दर्ज करें :   <input
+                          type="radio"
+                          name="category"
+                          value="1"
+                          checked={selfCategory === "1"}
+                          onChange={(event) => setSelfCategory(event.target.value)}
+
+                        /> स्वयं के लिए
+
+                        &nbsp;&nbsp;
+
+                        <input
+                          type="radio"
+                          name="category"
+                          value="2"
+                          checked={selfCategory === "2"}
+                          onChange={(event) => setSelfCategory(event.target.value)}
+
+                        /> अन्य  के लिए
+
                         <br />
                         <br />
 
-                          <Row>
+                        <Row>
                           <Col sm={7}>
-                         
+
                             <Form.Group className="require">
                               <Form.Label>
                                 आवेदक का नाम
@@ -269,19 +273,19 @@ console.log(location);
                               />
                             </Form.Group>
                           </Col>
-                         
 
-                         
+
+
                           <Col md={5}>
                             <Form.Group>
                               <Form.Label for="email">
                                 आवेदक का मोबाईल नंबर <span style={{ color: "red" }}>*</span>
                               </Form.Label>
                               <Form.Control
-                                 value={applicantMob}
-                                 onChange={(event) =>
-                                   applicantMob(event.target.value)
-                                 }
+                                value={applicantMob}
+                                onChange={(event) =>
+                                  applicantMob(event.target.value)
+                                }
                                 type="email"
                                 class="form-control"
                                 name="email"
@@ -314,7 +318,7 @@ console.log(location);
 
                           </Col>
                           <Col md={6}>
-                            
+
                             <Form.Label for="State">राज्य </Form.Label>
                             <Form.Select
                               class="form-control custom-select browser-default"
@@ -324,13 +328,13 @@ console.log(location);
                               }
                             >
                               <option selected="selected">select state</option>
-                               {state.map((st) => (
+                              {state.map((st) => (
                                 <option key={st.value} value={st.value}>
                                   {st.name}
                                 </option>
-                              ))} 
+                              ))}
                             </Form.Select>
-                           
+
                           </Col>
                         </Row>
                         <br />
@@ -355,14 +359,14 @@ console.log(location);
                             </Form.Select>
 
 
-                            
+
                           </Col>
 
                           <Col md={6}>
 
 
-                          
-                             <Form.Label for="cod">
+
+                            <Form.Label for="cod">
                               आवेदक श्रेणी
                               <span style={{ color: "red" }}>*</span>{" "}
                             </Form.Label>
@@ -387,47 +391,61 @@ console.log(location);
 
                         <Row>
                           <Col md={12}>
-                             <Form.Label for="address-1">
-                              विषय 
+                            <Form.Label for="address-1">
+                              विषय
                               <span style={{ color: "red" }}>*</span>{" "}
                             </Form.Label>
                             <Form.Control
                               as="textarea"
                               aria-label="With textarea"
-                            style={{height:'200px'}}
+                              style={{ height: '200px' }}
                               type="address"
                               class="form-control"
-                              
-                             value={subject}
-                             onChange={  (event) =>
-                             setSubject(event.target.value)
 
-                             }
-                             
+                              value={subject}
+                              onChange={(event) =>
+                                setSubject(event.target.value)
+
+                              }
+
                               required
                             />
-                            <span style={{color:'maroon'}}>बचे हुए अक्षर :-{1800-subject.length} </span>
-                             
+                            <span style={{ color: 'maroon' }}>बचे हुए अक्षर :-{1800 - subject.length} </span>
+
                           </Col>
                         </Row>
 
                         <br />
-                         क्या आप फाइल अपलोड करना चाहते हैं  :   <input
-                            type="radio"
-                            name="category"
-                            value="self"
+                      
+                        क्या आप फाइल अपलोड करना चाहते हैं  :   <input
+                          type="radio"
+                          name="category"
+                          value="N"
+                          checked={selectedUpload === "N"}
+                          onChange={(event) =>
+                          setSelectedUpload(event.target.value)
+                          }
+                        /> No
 
-                            /> No
-                          
-                            &nbsp;&nbsp;
-                            
-                             <input
-                            type="radio"
-                            name="category"
-                            value="others"
+                        &nbsp;&nbsp;
+                      
+                   
+                          <label>
+                        <input
+                          type="radio"
+                          name="category"
+                          value="Y"
+                          checked={selectedUpload==="Y"}
+                          onChange={(event) =>
+                          setSelectedUpload(event.target.value)
+                          }
 
-                            /> Yes
-                       
+                        /> Yes
+                        </label>
+                        &nbsp;&nbsp;
+                         {selectedUpload === 'Y' && (
+                        <input type="file" onChange={handleFileUpload} />
+                        )}
                         <br />
                         <br />
 

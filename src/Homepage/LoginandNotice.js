@@ -6,6 +6,8 @@ import { usehistory } from "react-router-dom";
 import axios from "axios";
 import bcrypt from 'bcryptjs';
 import CryptoJS from "crypto-js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import DataTable from "react-data-table-component";
 import {
@@ -32,7 +34,7 @@ const Reports = () => {
   
  
   
-
+  const notify = () => toast("login successful!");
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +59,7 @@ const Reports = () => {
         console.log('Login successful!');
         
         // Redirect to the dashboard page
-  navigate('/user/dashboard', {state:{userData},});
+  navigate('/user/dashboard', {state:{userData}});
         
       } else {
         alert('invalid username or password');
@@ -259,7 +261,7 @@ const Reports = () => {
                                     <br></br> */}
 
                                 <Button
-                                   onClick={handleSubmit}
+                                  onClick={handleSubmit}
                                   variant="contained"
                                   color="success"
                                   
@@ -269,6 +271,7 @@ const Reports = () => {
                                   LOGIN
                                   {/* <NavLink to="/getLogin">login</NavLink> */}
                                 </Button>
+                                <ToastContainer />
                                 {/* </CardContent> */}
                                 {/* </div> */}
                               </div>
