@@ -1,17 +1,18 @@
 import React from 'react';
 import LoginMenu from './Components/LoginMenu';
 import LoginFooter from './Login_page/LoginFooter';
-import ShowLetter from './CmHouse/ShowLetter';
+import ShowLetter2 from './CmHouse/ShowLetter2';
 
-const ShowLetterComp = () => {
+const ShowLetter2Comp = () => {
   return (
+
     <>
        <LoginMenu />
-       <ShowLetter />
+       <ShowLetter2 />
        <LoginFooter /> 
 
     </>
   )
 }
 
-export default ShowLetterComp;
+export default ShowLetter2Comp;

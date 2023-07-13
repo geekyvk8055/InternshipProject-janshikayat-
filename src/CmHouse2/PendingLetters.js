@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const ShowLetter = () => {
+const PendingLetters = () => {
   const [tableData,setTableData] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
   const test = "hello";
@@ -150,4 +150,4 @@ const ShowLetter = () => {
   )
 }
 
-export default ShowLetter;
+export default PendingLetters;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Row, Col, Container, ListGroup, Card,Toast } from "react-bootstrap";
+import { Row, Col, Container, ListGroup, Card, Toast } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { usehistory } from "react-router-dom";
 import axios from "axios";
@@ -21,7 +21,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import {withRouter} from "react-router-dom"
+import { withRouter } from "react-router-dom"
+//import { type } from "@testing-library/user-event/dist/type";
+import Swal from "sweetalert2";
 const Reports = () => {
   const randomString = Math.random().toString(36).slice(8);
   const [captcha, setCaptcha] = useState(randomString);
@@ -30,43 +32,97 @@ const Reports = () => {
   const [success, setSuccess] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [employeeId, setEmployeeId] = useState('');
+  const [userData, setuserData] = useState([]);
+  const [userDataOne, setuserDataOne] = useState([]);
   const navigate = useNavigate();
-  
- 
-  
-  const notify = () => toast("login successful!");
-  
+
+
+
+
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-   
+
 
     try {
-      const response = await axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`);
-      const userData = response.data.table[0];
-      
+
+      axios.all([
+        axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`),
+        axios.get(`https://localhost:44333/api/Master/getemployee/${username}`)
+      ])
+        .then(axios.spread((firstResponse, secondResponse) => {
+          console.log(firstResponse.data, secondResponse.data);
+          setuserData(firstResponse?.data?.table?.[0]);
+          setuserDataOne(secondResponse?.data?.table?.[0]);
+        }))
+      // const response = await axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`);
+      //const userData = firstResponse?.data?.table?.[0];
+
+      // const response1 = await axios.get(`https://localhost:44333/api/Master/getemployee/${username}`);
+      // const userData1 = response1?.data?.table?.[0];
+      // console.log(userData1);
+      // console.log(userData);
       //const storedHashedPassword = userData.password;
       //const enteredEncryptedPassword = CryptoJS.SHA256(password).toString();
 
-     // var salt = bcrypt.genSaltSync(10);
+      // var salt = bcrypt.genSaltSync(10);
       //var hash = bcrypt.hashSync(password, salt);
       //const hashedPassword = await bcrypt.hash(password, 10);
       //console.log(storedHashedPassword);
       //console.log(enteredEncryptedPassword);
-      
+
       //const passwordMatch = await  bcrypt.compareSync(hash, storedHashedPassword);
-      
-      if (userData.password === password) {
+      if (userData?.password == password) {
+        
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Login successful!',
+          text: 'You will be redirected to your dashboard.',
+          showConfirmButton: true,
+          timer: 3000
+        })
+
+        window.scrollTo(0, 0);
         console.log('Login successful!');
-        
+
+
         // Redirect to the dashboard page
-  navigate('/user/dashboard', {state:{userData}});
-        
-      } else {
-        alert('invalid username or password');
-        
+        navigate('/user/dashboard', { state: { userData } });
+
+
+
+      }
+      else if
+        (userDataOne?.employee_mob === password) {
+        console.log("userData1", userDataOne.employee_mob);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Login successful!',
+          text: 'You will be redirected to your dashboard.',
+          showConfirmButton: true,
+          timer: 3000
+        })
+
+        navigate('/cmHouse', { state: { userDataOne } });
+
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Please Enter Correct Username or Password ',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        //alert('invalid username or password');
+
       }
 
-     
+
     } catch (error) {
       console.log('Login failed:', error);
     }
@@ -90,10 +146,10 @@ const Reports = () => {
   //         // Redirect to dashboard or home page
   //       } else {
   //         console.log("failed");
-          
+
   //         // Display error message
   //       }
-        
+
   //     })
   //     .catch((error) => {
   //       console.log(error);
@@ -117,7 +173,9 @@ const Reports = () => {
     }
   };
 
- 
+console.log(password);
+console.log(userData);
+console.log(userDataOne);
   return (
     <>
       <Container fluid style={{ background: "#E2E4F1", marginTop: "25px" }}>
@@ -207,24 +265,25 @@ const Reports = () => {
                         textAlign: "center",
                         fontWeight: "bolder",
                         height: "10vh",
-                        background:'red'
+                        background: 'red'
                       }}
                     >
-                    
+
                       <div style={{ marginTop: "9px" }}>Login & Register</div>
                     </h3>
                     <Col md={12}>
                       <div style={{}}>
                         <div class="row content">
                           <div class="col-md-6">
-                          
+
                             <h3 class="signin-text mb-3"> Sign In</h3>
-                            
+
                             <form >
                               <div class="form-group">
                                 <label for="UserId">UserId</label>
                                 <input
                                   name="username"
+                                  type="text"
                                   class="form-control"
                                   value={username}
                                   onChange={(e) => setUsername(e.target.value)}
@@ -264,10 +323,10 @@ const Reports = () => {
                                   onClick={handleSubmit}
                                   variant="contained"
                                   color="success"
-                                  
+
                                   sx={{ marginTop: "20px" }}
                                 >
-                                
+
                                   LOGIN
                                   {/* <NavLink to="/getLogin">login</NavLink> */}
                                 </Button>

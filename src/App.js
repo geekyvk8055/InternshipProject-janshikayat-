@@ -37,6 +37,8 @@ import CounterCatMppingComp from "./CounterCatMppingComp";
 import UserApplicationDetailComp from "./UserApplicationDetailComp";
 import ShowLetter from "./CmHouse/ShowLetter";
 import ShowLetterComp from "./ShowLetterComp";
+import ShowLetter2Comp from "./ShowLetter2Comp";
+import PendingLettersComp from "./PendingLetterComp";
 
 //import AdminRouting from "./AdminRouting";
 
@@ -68,8 +70,10 @@ const App = () => {
       <Route path="/user/dashboard" element={<UserDashboardComp />} />
       <Route path="/admin/countercat_mapping" element={<CounterCatMppingComp />} />
       <Route path="/user/applicant_detail" element={<UserApplicationDetailComp />} />
-//  CmHouse Routing
-<Route path="/cmHouse" element={<ShowLetterComp />} />
+      //  CmHouse Routing
+      <Route path="/cmHouse" element={<ShowLetterComp />} />
+      <Route path="/cmHouse/ShowLetter" element={<ShowLetter2Comp />} />
+      <Route path="/cmHouse2/PendingLetters" element={<PendingLettersComp />} />
 
       
 

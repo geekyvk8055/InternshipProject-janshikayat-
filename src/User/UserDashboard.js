@@ -5,6 +5,7 @@ import { BucketFill } from "react-bootstrap-icons";
 import axios from "axios";
 import { set } from "react-hook-form";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 //import LoginandNotice from './Homepage/LoginandNotice'
 
 const UserDashboard = (props) => {
@@ -28,7 +29,7 @@ const UserDashboard = (props) => {
 
 
 
-
+ 
 
   const handlenameChange = (e) => {
     setApplicantName(e.target.value)
@@ -380,8 +381,8 @@ const UserDashboard = (props) => {
                               <option selected>आवेदक श्रेणी चुनें</option>
 
                               {applicantCat.map((ac) => (
-                                <option key={ac.appCategoryID} value={ac.appCategoryID}>
-                                  {ac.appCategoryName}
+                                <option key={ac.categoryID} value={ac.categoryID}>
+                                  {ac.categoryName}
                                 </option>
                               ))}
                             </Form.Select>
