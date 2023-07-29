@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
 import axios from "axios";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -22,12 +22,12 @@ const CreateOffice = () => {
   const [office, setOffice] = useState([]);
   const [officeadd, setOfficeadd] = useState([]);
   const [officemobile, setOfficemobile] = useState([]);
-  const [officefax, setOfficefax] = useState([]);
+  const [officefax, setOfficefax] = useState("");
   const [officeurl, setOfficeurl] = useState([]);
   const [email, setEmail] = useState([]);
   const [datatable, setDatatable] = useState([]);
   const [datatableToedit, setDatatableToedit] = useState([]);
-  
+
   //country fetching
   useEffect(() => {
     const fetchcountries = async () => {
@@ -58,7 +58,8 @@ const CreateOffice = () => {
     const fetchdistricts = async () => {
       if (selectedState) {
         const response = await axios.get(
-          "https://localhost:44333/api/Master/GetDistrict");
+          "https://localhost:44333/api/Master/GetDistrict"
+        );
         setDistrict(response.data);
         console.log(setSelectedDistrict);
       }
@@ -106,21 +107,14 @@ const CreateOffice = () => {
     fetchofficecategory();
   }, [selectedOfficelevel]);
 
-
-
   const fetchoffice = async (selectedDistrict, selectedBasedepartment) => {
-    try{
-      const response = await axios.get( 
+    try {
+      const response = await axios.get(
         `https://localhost:44333/api/Master/GetofficeByid/${selectedDistrict}/${selectedBasedepartment}`
-
       );
       setDatatable(response.data.table);
-    }
-    catch(err){
-
-    }
+    } catch (err) {}
   };
-
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -156,323 +150,482 @@ const CreateOffice = () => {
     }
   };
 
-  const handleEditButton = (item) =>{
-    setDatatableToedit(item)
-
-  }
-
-
-
-
+  const handleEditButton = (item) => {
+    setDatatableToedit(item);
+  };
 
   return (
     <>
-      <Container fluid>
-        <Row className="m-3">
-          <Col md={12}>
+      <Container
+        fluid
+        style={{ backgroundImage: 'url("/Images/image_admin_bg.jpg")' }}
+      >
+        <Row>
+          <Col md={12} style={{ marginTop: "25px" }}>
             <Row>
               <Col md={3}>
-                <h3 className="text-center" style={{background:"red", alignItems:'center', justifyContent:'center', borderRadius:'5px'}}>Admin Menu</h3>
-                <ul className="adminList">
-                  <li>
-                    <NavLink to="/getLogin" style={{textDecoration:"none"}}>Create Counter Location</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createCounter" style={{textDecoration:"none"}}>Create Counter</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/CreateOffice" style={{textDecoration:"none"}}>Create Office</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createOfficeLevel" style={{textDecoration:"none"}}>
+                <h3
+                  className="text-center"
+                  style={{
+                    background: "#FA0C00",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    color: "white",
+                  }}
+                >
+                  Admin Menu
+                </h3>
+                <div
+                  style={{
+                    border: "1px solid whitesmoke",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    background: "#eaf9ff",
+                  }}
+                >
+                  <a>
+                    <NavLink
+                      to="/getLogin"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter Location
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createCounter"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/CreateOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Office
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createOfficeLevel"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Office Level
                     </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createEmployee" style={{textDecoration:"none"}}>Create Employee</NavLink>
-                  </li>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createEmployee"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Employee
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
-                  <NavLink to="/alloteEmployeeOffice" style={{textDecoration:"none"}}> Allote Employee Office Or section</NavLink>
-                  </li>
+                  <a>
+                    <NavLink
+                      to="/alloteEmployeeOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office Or section
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
-                  <NavLink to="/alloteOfficeRole" style={{textDecoration:"none"}}>Allote Employee Office/Section Role</NavLink>
-                  </li>
+                  <a>
+                    <NavLink
+                      to="/alloteOfficeRole"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office/Section Role
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/CreatePassword"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Employee Password
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/ResetEmplPwd"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Reset Employee Password
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Reset Employee Password
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/Section"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Create Section
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Section
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/counter_allotement"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Allote Counter To User
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Counter To User
                     </NavLink>
-                  </li>
-                  <li>
+                  </a>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/countercat_mapping"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Counter Category Mapping
-                    </NavLink>
-                  </li>
-                </ul>
-              </Col>
-
-              <Col md={9} style={{borderRadius:'3px', border:'1px solid black'}}>
-                <div>
-                  {/* <label>आवेदन की स्थिति हेतु आवेदन नंबर डालें : </label>
-                  <input /> */}
-
-                  {/* <Button>देखें </Button> */}
-                </div>
-                <form >
-                  <div>
-                    <h5 className="text-center">Create Office</h5>
-                    <div className="form-group">
-                      <label for="Country">देश </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedCountry}
-                        onChange={(event) =>
-                          setSelectedCountry(event.target.value)
-                          
-                        }
-                      >
-                        <option value="">Select a country</option>
-                        {country.map((country) => (
-                          <option key={country.value} value={country.value}>
-                            {country.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label for="Country">राज्य </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedState}
-                        onChange={(event) =>
-                          setSelectedState(event.target.value)
-                        }
-                      >
-                        <option value="">Select a State</option>
-                        {state.map((state) => (
-                          <option key={state.value} value={state.value}>
-                            {state.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label for="Country">जिला </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedDistrict}
-                        onChange={(event) =>{
-                          setSelectedDistrict(event.target.value);
-                          fetchoffice(event.target.value,selectedBasedepartment)
-                        }
-                        }
-                      >
-                        <option value="">Select a district</option>
-                        {district.map((district) => (
-                          <option key={district.value} value={district.value}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label for="State">मुख्य विभाग </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedBasedepartment}
-                      onChange={(event) =>{
-                        setSelectedBasedepartment(event.target.value);
-                        fetchoffice(selectedDistrict,event.target.value)
-                      }
-                      }
-                    >
-                      <option value="">Select a department </option>
-                      {basedepartment.map((basedept) => (
-                        <option key={basedept.value} value={basedept.value}>
-                          {basedept.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>ऑफिस लेवल : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedOfficelevel}
-                      onChange={(event) =>
-                        setSelectedOfficelevel(event.target.value)
-                      }
-                    >
-                      <option value="">Select a Office level </option>
-                      {officelevel.map((officelevel) => (
-                        <option
-                          key={officelevel.value}
-                          value={officelevel.value}
-                        >
-                          {officelevel.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय श्रेणी : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedOfficecategory}
-                      onChange={(event) =>
-                        setSelectedOfficecategory(event.target.value)
-                      }
-                    >
-                      <option value="">Select a Office category </option>
-                      {officecategory.map((officecat) => (
-                        <option key={officecat.value} value={officecat.value}>
-                          {officecat.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>
-                      कार्यालय :
-                      <input
-                        type="text"
-                        class="form-control custom-select browser-default"
-                        value={datatableToedit}
-                        onChange={(event) => setDatatableToedit(event.target.value)}
-                        
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
                       />
-                    </label>
-                   
-                     
+                      Counter Category Mapping
+                    </NavLink>
+                  </a>
+                </div>
+                <hr />
+              </Col>
+              &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+              <Col
+                md={8}
+                style={{ borderRadius: "3px", border: "1px solid black", marginTop:'40px' }}
+              >
+              <div className="bg-success  text-center mt-3 mb-3 "
+                  style={{
+                    height: "10vh",
+                    fontSize: "35px",
+                    color: "white",
+                    fontFamily: "Times New Roman,Arial, sans-serif",
+                  }}>
+              Create Office
+              </div>
+                <form>
                   
-                    <br />
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय का पता : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={officeadd}
-                      onChange={(event) => setOfficeadd(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय फोन नंबर : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={officemobile}
-                      onChange={(event) => setOfficemobile(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय (fax no. ) </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={officefax}
-                      onChange={(event) => setOfficefax(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय (URL) </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={officeurl}
-                      onChange={(event) => setOfficeurl(event.target.value)}
+                  <Row>
+                    <Col md={6}>
+                      <div className="form-group">
+                        <Form.Label for="Country">देश </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedCountry}
+                          onChange={(event) =>
+                            setSelectedCountry(event.target.value)
+                          }
+                        >
+                          <option value="">Select a country</option>
+                          {country.map((country) => (
+                            <option key={country.value} value={country.value}>
+                              {country.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
                     
-                    />
-                  </div>
+                    <Col md={6}>
+                      <div className="form-group">
+                        <Form.Label for="Country">राज्य </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedState}
+                          onChange={(event) =>
+                            setSelectedState(event.target.value)
+                          }
+                        >
+                          <option value="">Select a State</option>
+                          {state.map((state) => (
+                            <option key={state.value} value={state.value}>
+                              {state.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label for="Country">जिला </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedDistrict}
+                          onChange={(event) => {
+                            setSelectedDistrict(event.target.value);
+                            fetchoffice(
+                              event.target.value,
+                              selectedBasedepartment
+                            );
+                          }}
+                        >
+                          <option value="">Select a district</option>
+                          {district.map((district) => (
+                            <option key={district.value} value={district.value}>
+                              {district.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
 
-                  <div className="form-group">
-                    <label>EMAIL ID. </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                  </div>
-
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label for="State">मुख्य विभाग </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedBasedepartment}
+                          onChange={(event) => {
+                            setSelectedBasedepartment(event.target.value);
+                            fetchoffice(selectedDistrict, event.target.value);
+                          }}
+                        >
+                          <option>Select a department </option>
+                          {basedepartment.map((basedept) => (
+                            <option key={basedept.value} value={basedept.value}>
+                              {basedept.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>ऑफिस लेवल : </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedOfficelevel}
+                          onChange={(event) =>
+                            setSelectedOfficelevel(event.target.value)
+                          }
+                        >
+                          <option value="">Select a Office level </option>
+                          {officelevel.map((officelevel) => (
+                            <option
+                              key={officelevel.value}
+                              value={officelevel.value}
+                            >
+                              {officelevel.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय श्रेणी : </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedOfficecategory}
+                          onChange={(event) =>
+                            setSelectedOfficecategory(event.target.value)
+                          }
+                        >
+                          <option value="">Select a Office category </option>
+                          {officecategory.map((officecat) => (
+                            <option
+                              key={officecat.value}
+                              value={officecat.value}
+                            >
+                              {officecat.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय :</Form.Label>
+                        <Form.Control
+                          type="text"
+                          class="form-control"
+                          value={datatableToedit}
+                          onChange={(event) =>
+                            setDatatableToedit(event.target.value)
+                          }
+                        />
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय का पता : </Form.Label>
+                        <Form.Control
+                          class="form-control"
+                          value={officeadd}
+                          onChange={(event) => setOfficeadd(event.target.value)}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय फोन नंबर : </Form.Label>
+                        <Form.Control
+                          class="form-control"
+                          value={officemobile}
+                          onChange={(event) =>
+                            setOfficemobile(event.target.value)
+                          }
+                        />
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय (fax no. ) </Form.Label>
+                        <Form.Control
+                          class="form-control"
+                          value={officefax}
+                          onChange={(event) => setOfficefax(event.target.value)}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>कार्यालय (URL) </Form.Label>
+                        <Form.Control
+                          class="form-control"
+                          value={officeurl}
+                          onChange={(event) => setOfficeurl(event.target.value)}
+                        />
+                      </div>
+                    </Col>
+                    <Col>
+                      <div className="form-group">
+                        <Form.Label>EMAIL ID. </Form.Label>
+                        <Form.Control
+                          class="form-control"
+                          value={email}
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  <br />
                   <div>
                     <Button onClick={handlesubmit}> submit</Button>
                     &nbsp;
-                    <Button href="#" className="bg-danger">Cancel</Button>
+                    <Button  className="bg-danger">
+                      Clear
+                    </Button>
                   </div>
+                  <br />
                   <Table striped bordered hover>
-                        <thead>
-                          <tr>
-                          <th>S.No</th>
-                            <th>Country</th>
-                            <th>State</th>
-                            <th>District</th>
-                            <th>Base Department</th>
-                            <th>Office Level</th>
-                            <th>Office Category</th>
-                            <th>Office</th>
-                            <th>Action</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                         {datatable?.map((item, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>India</td>
-                            <td>Chattisgarh</td>
-                            <td>{item.district_Name}</td>
-                            <td>{item.dept_name}</td>
-                            <td>{item.officeCategoryName}</td>
-                            <td>{item.officeLevelName}</td>
-                            <td>{item.officeName}</td>
-                            <td>
-                              <Button onClick={ () => handleEditButton(item.officeName, index)}>Edit</Button>
-                            </td>
-                          </tr>
-                        ))} 
-                        </tbody>
-                      </Table>
+                    <thead>
+                      <tr>
+                        <th>S.No</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>District</th>
+                        <th>Base Department</th>
+                        <th>Office Level</th>
+                        <th>Office Category</th>
+                        <th>Office</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {datatable?.map((item, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>India</td>
+                          <td>Chattisgarh</td>
+                          <td>{item.district_Name}</td>
+                          <td>{item.dept_name}</td>
+                          <td>{item.officeCategoryName}</td>
+                          <td>{item.officeLevelName}</td>
+                          <td>{item.officeName}</td>
+                          <td>
+                            <Button
+                              onClick={() =>
+                                handleEditButton(item.officeName, index)
+                              }
+                            >
+                              Edit
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
                 </form>
               </Col>
             </Row>

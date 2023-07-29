@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -89,8 +89,6 @@ const CreateEmployee = () => {
     fetchdesignation();
   }, [selectedBasedepartment]);
 
- 
-
   //post method
 
   const handleSubmit = async (event) => {
@@ -133,102 +131,221 @@ const CreateEmployee = () => {
 
   return (
     <>
-      <Container fluid>
+      <Container
+        fluid
+        style={{ backgroundImage: 'url("/Images/image_admin_bg.jpg")' }}
+      >
         <Row>
-          <Col md={12}>
+          <Col md={12} style={{ marginTop: "25px" }}>
             <Row>
               <Col md={3}>
-                <h3 className="text-center" style={{background:"red", alignItems:'center', justifyContent:'center', borderRadius:'5px'}}>Admin Menu</h3>
-                <ul className="adminList">
-                  <li>
-                    <NavLink to="/getLogin" style={{textDecoration:"none"}}>Create Counter Location</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createCounter" style={{textDecoration:"none"}}>Create Counter</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/CreateOffice" style={{textDecoration:"none"}}>Create Office</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createOfficeLevel" style={{textDecoration:"none"}}>
+                <h3
+                  className="text-center"
+                  style={{
+                    background: "#FA0C00",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    color: "white",
+                  }}
+                >
+                  Admin Menu
+                </h3>
+                <div
+                  style={{
+                    border: "1px solid whitesmoke",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    background: "#eaf9ff",
+                  }}
+                >
+                  <a>
+                    <NavLink
+                      to="/getLogin"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter Location
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createCounter"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/CreateOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Office
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createOfficeLevel"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Office Level
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createEmployee"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Employee
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/alloteEmployeeOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office Or section
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/alloteOfficeRole"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      {" "}
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office/Section Role
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
-                  <NavLink to="/createEmployee" style={{textDecoration:"none"}}>Create Employee</NavLink>
-                  </li>
-                  <li>
-                  <NavLink to="/alloteEmployeeOffice" style={{textDecoration:"none"}}> Allote Employee Office Or section</NavLink>
-                  </li>
-
-                  <li>
-                  <NavLink to="/alloteOfficeRole" style={{textDecoration:"none"}}>Allote Employee Office/Section Role</NavLink>
-                  </li>
-
-
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/CreatePassword"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Employee Password
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/ResetEmplPwd"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Reset Employee Password
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Reset Employee Password
                     </NavLink>
-                  </li>
+                  </a>
 
+                  <hr />
 
-
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/Section"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Create Section
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Section
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/counter_allotement"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Allote Counter To User
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Counter To User
                     </NavLink>
-                  </li>
-                  <li>
+                  </a>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/countercat_mapping"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Counter Category Mapping
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Counter Category Mapping
                     </NavLink>
-                  </li>
-                </ul>
+                  </a>
+                </div>
+                <hr />
               </Col>
-
-              <Col md={9} style={{borderRadius:'3px', border:'1px solid black'}}>
-                <div>
-                  {/* <label>आवेदन की स्थिति हेतु आवेदन नंबर डालें : </label>
-                  <input /> */}
-
-                  {/* <Button>देखें </Button> */}
+              &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+              <Col
+                md={8}
+                style={{
+                  borderRadius: "3px",
+                  border: "1px solid black",
+                  marginTop: "40px",
+                }}
+              >
+                <div
+                  className="bg-success  text-center mt-3 mb-3 "
+                  style={{ height: "10vh", fontSize:'35px',color:'white', fontFamily:'Times New Roman,Arial, sans-serif' }}
+                >
+                  Create Employee
                 </div>
                 <form onSubmit={handleSubmit}>
-                  <div>
-                    <h5 className="text-center">Create Employee</h5>
-                    <div className="form-group">
-                      <label for="Country">देश </label>
-                      <select
+                  <Row>
+                    <Col>
+                      <Form.Label for="Country">देश </Form.Label>
+                      <Form.Select
                         class="form-control custom-select browser-default"
                         value={selectedCountry}
                         onChange={(event) =>
@@ -241,13 +358,13 @@ const CreateEmployee = () => {
                             {country.name}
                           </option>
                         ))}
-                      </select>
-                    </div>
+                      </Form.Select>
+                    </Col>
 
-                    <div className="form-group">
-                      <label for="Country">राज्य </label>
-                      <select
-                        class="form-control custom-select browser-default"
+                    <Col>
+                      <Form.Label for="State">राज्य </Form.Label>
+                      <Form.Select
+                        class="form-control"
                         value={selectedState}
                         onChange={(event) =>
                           setSelectedState(event.target.value)
@@ -259,13 +376,15 @@ const CreateEmployee = () => {
                             {state.name}
                           </option>
                         ))}
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label for="Country">जिला </label>
-                      <select
-                        class="form-control custom-select browser-default"
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <Form.Label for="District">जिला </Form.Label>
+                      <Form.Select
+                        class="form-control"
                         value={selectedDistrict}
                         onChange={(event) =>
                           setSelectedDistrict(event.target.value)
@@ -277,113 +396,130 @@ const CreateEmployee = () => {
                             {district.name}
                           </option>
                         ))}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label for="State">मुख्य विभाग </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedBasedepartment}
-                      onChange={(event) =>
-                        setSelectedBasedepartment(event.target.value)
-                      }
-                    >
-                      <option value="">Select a department </option>
-                      {basedepartment.map((basedept) => (
-                        <option key={basedept.value} value={basedept.value}>
-                          {basedept.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                      </Form.Select>
+                    </Col>
 
-                  <div className="form-group">
-                    <label>कर्मचारी का नाम (Employee Name): </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={employeeName}
-                      onChange={(event) => setEmployeeName(event.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>पद(designation) : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedDesignation}
-                      onChange={(event) =>
-                        setSelectedDesignation(event.target.value)
-                      }
-                    >
-                      <option value="">Select Designation </option>
-                      {designation.map((design) => (
-                        <option key={design.value} value={design.value}>
-                          {design.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  &nbsp;
+                    <Col>
+                      <Form.Label for="State">मुख्य विभाग </Form.Label>
+                      <Form.Select
+                        class="form-control"
+                        value={selectedBasedepartment}
+                        onChange={(event) =>
+                          setSelectedBasedepartment(event.target.value)
+                        }
+                      >
+                        <option value="">Select a department </option>
+                        {basedepartment.map((basedept) => (
+                          <option key={basedept.value} value={basedept.value}>
+                            {basedept.name}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <Form.Label>कर्मचारी का नाम (Employee Name): </Form.Label>
+                      <Form.Control
+                        class="form-control"
+                        value={employeeName}
+                        onChange={(event) =>
+                          setEmployeeName(event.target.value)
+                        }
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>पद(designation) : </Form.Label>
+                      <Form.Select
+                        class="form-control custom-select browser-default"
+                        value={selectedDesignation}
+                        onChange={(event) =>
+                          setSelectedDesignation(event.target.value)
+                        }
+                      >
+                        <option value="">Select Designation </option>
+                        {designation.map((design) => (
+                          <option key={design.value} value={design.value}>
+                            {design.name}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <Form.Label htmlFor="dob">Date of Birth: </Form.Label>
+                      <Form.Control
+                        id="dob"
+                        type="date"
+                        value={dob}
+                        onChange={(event) => setDob(event.target.value)}
+                        required
+                      />
+                    </Col>
 
-                  <div className="form-group">
-                    <label htmlFor="dob">Date of Birth: </label>
-                    <input
-                      id="dob"
-                      type= "date"
-                      value= {dob}
-                      onChange={(event) => setDob(event.target.value)}
-                   required />
-                  </div>
-                  &nbsp;
-
-                  <div className="form-group">
-                    <label> पता : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={address}
-                      onChange={(event) => setAddress(event.target.value)}
-                   required />
-                  </div>
-
-                  <div className="form-group">
-                    <label> फोन नंबर : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={mobilenumber}
-                      onChange={(event) => setMobilenumber(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>alternate Number : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={alternatenumber}
-                      onChange={(event) => setAlternatenumber(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>कार्यालय फोन नंबर : </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={officemobile}
-                      onChange={(event) => setOfficemobile(event.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>EMAIL ID. </label>
-                    <input
-                      class="form-control custom-select browser-default"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                  </div>
-
+                    <Col>
+                      <Form.Label> पता : </Form.Label>
+                      <Form.Control
+                        class="form-control"
+                        value={address}
+                        onChange={(event) => setAddress(event.target.value)}
+                        required
+                      />
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <Form.Label> फोन नंबर : </Form.Label>
+                      <Form.Control
+                        class="form-control"
+                        value={mobilenumber}
+                        onChange={(event) =>
+                          setMobilenumber(event.target.value)
+                        }
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>alternate Number : </Form.Label>
+                      <Form.Control
+                        class="form-control"
+                        value={alternatenumber}
+                        onChange={(event) =>
+                          setAlternatenumber(event.target.value)
+                        }
+                      />
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      <Form.Label>कार्यालय फोन नंबर : </Form.Label>
+                      <Form.Control
+                        class="form-control"
+                        value={officemobile}
+                        onChange={(event) =>
+                          setOfficemobile(event.target.value)
+                        }
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>EMAIL ID. </Form.Label>
+                      <Form.Control
+                        class="form-control custom-select browser-default"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                  <br />
                   <div>
-                    <Button type="submit"> submit</Button>
-                    <a href="#">Cancel</a>
+                    <Button type="submit"> submit</Button>&nbsp;
+                    <Button href="#" className="bg-danger">
+                      Clear
+                    </Button>
                   </div>
                 </form>
               </Col>

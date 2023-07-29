@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row,Form } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -66,101 +66,140 @@ const CreateCounter = () => {
 
   return (
     <>
-      <Container fluid>
-        <Row className="m-3">
-          <Col md={12}>
+      <Container fluid style={{backgroundImage:'url("/Images/image_admin_bg.jpg")'}}>
+        <Row >
+          <Col md={12} style={{marginTop:'25px' }}>
             <Row>
               <Col md={3} >
-                <h3 className="text-center"  style={{background:"red", alignItems:'center', justifyContent:'center', borderRadius:'5px'}}>Admin Menu</h3>
-                <ul className="adminList">
-                  <li>
-                   <NavLink to="/getLogin" style={{textDecoration:"none"}}>Create Counter Location</NavLink>
-                  </li>
-                  <li>
-                  <NavLink to="/createCounter" style={{textDecoration:"none"}}>Create Counter</NavLink>
-                  </li>
-                  <li>
-                  <NavLink to="/CreateOffice" style={{textDecoration:"none"}}>Create Office</NavLink>
-                  </li>
-                  <li>
-                  <NavLink to="/createOfficeLevel" style={{textDecoration:"none"}}>Create Office Level</NavLink>
-                  </li>
-                  <li>
-                  <NavLink to="/createEmployee" style={{textDecoration:"none"}}>Create Employee</NavLink>
-                  </li>
+              <h3
+                  className="text-center"
+                  style={{
+                    background: "#FA0C00",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderTopLeftRadius:'10px',
+                    borderTopRightRadius:'10px',
+                    color:'white'
+                  
 
-                  <li>
-                  <NavLink to="/alloteEmployeeOffice" style={{textDecoration:"none"}}> Allote Employee Office Or section</NavLink>
-                  </li>
+                  }}
+                >
+                  Admin Menu
+                </h3> 
+                <div style={{border:'1px solid whitesmoke',borderTopLeftRadius:'10px',
+                    borderTopRightRadius:'10px',background:'#eaf9ff'}}>            
+                  <a>
+                   <NavLink to="/getLogin" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Create Counter Location</NavLink>
+                  </a><hr />
+                  <a>
+                  <NavLink to="/createCounter" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Create Counter</NavLink>
+                  </a><hr />
+                  <a>
+                  <NavLink to="/CreateOffice" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Create Office</NavLink>
+                  </a><hr />
+                  <a>
+                  <NavLink to="/createOfficeLevel" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Create Office Level</NavLink>
+                  </a><hr />
+                  <a>
+                  <NavLink to="/createEmployee" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Create Employee</NavLink>
+                  </a><hr />
 
-                  <li>
-                  <NavLink to="/alloteOfficeRole" style={{textDecoration:"none"}}>Allote Employee Office/Section Role</NavLink>
-                  </li>
-
-                  <li>
+                  <a>
+                  <NavLink to="/alloteEmployeeOffice" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+ Allote Employee Office Or section</NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                  <NavLink to="/alloteOfficeRole" style={{ textDecoration: "none",color:'#2e415c' }}>                     <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+Allote Employee Office/Section Role</NavLink>
+                  </a>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/CreatePassword"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none",color:'#2e415c' }}
                     >
+                                         <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+
                       Create Employee Password
                     </NavLink>
-                  </li>
+                  </a>
 
-
-                  <li>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/ResetEmplPwd"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none",color:'#2e415c' }}
                     >
+                                         <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+
                        Reset Employee Password
                     </NavLink>
-                  </li>
+                  </a>
 
-
-                  <li>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/Section"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none",color:'#2e415c' }}
                     >
+                                         <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+
                        Create Section
                     </NavLink>
-                  </li>
-
-                  <li>
+                  </a>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/counter_allotement"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none",color:'#2e415c' }}
                     >
+                                         <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+
                        Allote Counter To User
                     </NavLink>
-                  </li>
-                  <li>
+                  </a><hr />
+                  <a>
                     <NavLink
                       to="/admin/countercat_mapping"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none",color:'#2e415c' }}
                     >
+                                         <img style={{height:'4vh',width:'4vw'}} src="/Images/icons8-arrow-48.png"  />
+
                        Counter Category Mapping
                     </NavLink>
-                  </li>
-                </ul>
+                  </a>
+                  </div><hr />
+              
               </Col>
-
-              <Col md={9} style={{borderRadius:'3px', border:'1px solid black'}}>
-                <div>
-                  {/* <label>आवेदन की स्थिति हेतु आवेदन नंबर डालें : </label>
-                  <input /> */}
-
-                  {/* <Button>देखें </Button> */}
+              &nbsp;&nbsp;
+             &nbsp;&nbsp;
+             &nbsp;&nbsp;
+              <Col md={8} style={{borderRadius:'3px', border:'1px solid black', marginTop:'40px'}}>
+                <div className="bg-success  text-center mt-3 mb-3 "
+                  style={{
+                    height: "10vh",
+                    fontSize: "35px",
+                    color: "white",
+                    fontFamily: "Times New Roman,Arial, sans-serif",
+                  }}>
+                Create Counter
                 </div>
                 <form onSubmit={handleSubmit}>
-                <div>
-                  <h5>Create Counter</h5>
+                
                  
-
-                  <div className="form-group">
-                    <label for="Country">जिला </label>
-                    <select
-                      class="form-control custom-select browser-default"
+                 
+                 <Row>
+                 <Col>
+                  
+                    <Form.Label for="district">जिला :</Form.Label>
+                    <Form.Select
+                      class="form-control"
                       value={selectedDistrict}
                       onChange={(event) =>
                         setSelectedDistrict(event.target.value)
@@ -172,13 +211,13 @@ const CreateCounter = () => {
                           {district.name}
                         </option>
                       ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label for="State">Counter Location </label>
-                  <select
-                    class="form-control custom-select browser-default"
+                    </Form.Select>
+                    </Col>
+                    <Col>
+               
+                  <Form.Label for="State">Counter Location :</Form.Label>
+                  <Form.Select
+                    class="form-control"
                     value={selectedCoutnterlocation}
                     onChange={(event) =>
                       setSelectedCounterlocation(event.target.value)
@@ -191,15 +230,18 @@ const CreateCounter = () => {
                         {j.name}
                       </option>
                     ))}
-                  </select>
-                </div>
+                  </Form.Select>
+                  </Col>
+                </Row>
+                <br />
                 <div>
-                  <label>Counter : </label>
-                  <input
+                  <Form.Label>Counter : </Form.Label>
+                  <Form.Control
                     value={counter}
                     onChange={(event) => setCounter(event.target.value)}
                   />
                 </div>
+                <br />
 
                 <div>
                   <Button type="submit"> submit</Button>

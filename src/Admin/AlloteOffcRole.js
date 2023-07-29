@@ -3,6 +3,7 @@ import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { FourMp } from "@mui/icons-material";
 
 const AlloteOffcRole = () => {
   const [country, setCountry] = useState([]);
@@ -100,46 +101,45 @@ const AlloteOffcRole = () => {
 
   //post method
 
- const handleSubmit = async (event,item) => {
+  const handleSubmit = async (event, item) => {
     event.preventDefault();
 
     try {
       const response = await axios.post(
         "https://localhost:44333/api/Master/postemployee_role",
         {
-        designation_no: "",
-        section_code: "",
-        employee_id: selectedEmployee,
-        basedept_id: selectedBasedepartment,
-        office_id: "",
-        district_id: selectedDistrict,
-        user_id: "",
-        active_status: "",
-        designation_id: selectedDesignation,
-        roll_type_code: item.value
+          designation_no: "",
+          section_code: "",
+          employee_id: selectedEmployee,
+          basedept_id: selectedBasedepartment,
+          office_id: "",
+          district_id: selectedDistrict,
+          user_id: "",
+          active_status: "",
+          designation_id: selectedDesignation,
+          roll_type_code: item.value,
         }
       );
-      console.log(item)
-      if (response.data)
-      {
-        alert('submitted');
+      console.log(item);
+      if (response.data) {
+        alert("submitted");
+      } else {
+        alert("wrong entered data");
       }
-      else{alert('wrong entered data')}
       console.log(response.data); // do something with the response data
     } catch (error) {
       console.log(error); // handle error
     }
-   
   };
 
-useEffect(() => {
-  const fetchrole = async () => {
-    const response = await axios.get(
-      "https://localhost:44333/api/Master/GetRoll");
-       setRole(response.data);
-    
-  }
-  fetchrole();
+  useEffect(() => {
+    const fetchrole = async () => {
+      const response = await axios.get(
+        "https://localhost:44333/api/Master/GetRoll"
+      );
+      setRole(response.data);
+    };
+    fetchrole();
   }, []);
   // const handleOfficeClick = () => {
   //   setShowTable(true);
@@ -147,234 +147,372 @@ useEffect(() => {
 
   return (
     <>
-      <Container fluid>
-        <Row className="m-3">
-          <Col md={12}>
+      <Container
+        fluid
+        style={{ backgroundImage: 'url("/Images/image_admin_bg.jpg")' }}
+      >
+        <Row>
+          <Col md={12} style={{ marginTop: "25px" }}>
             <Row>
               <Col md={3}>
-                <h3 className="text-center" style={{background:"red", alignItems:'center', justifyContent:'center', borderRadius:'5px'}}>Admin Menu</h3>
-                <ul className="adminList">
-                  <li>
-                    <NavLink to="/getLogin" style={{textDecoration:"none"}}>Create Counter Location</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createCounter" style={{textDecoration:"none"}}>Create Counter</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/CreateOffice" style={{textDecoration:"none"}}>Create Office</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createOfficeLevel" style={{textDecoration:"none"}}>
+                <h3
+                  className="text-center"
+                  style={{
+                    background: "#FA0C00",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    color: "white",
+                  }}
+                >
+                  Admin Menu
+                </h3>
+                <div
+                  style={{
+                    border: "1px solid whitesmoke",
+                    borderTopLeftRadius: "10px",
+                    borderTopRightRadius: "10px",
+                    background: "#eaf9ff",
+                  }}
+                >
+                  <a>
+                    <NavLink
+                      to="/getLogin"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter Location
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createCounter"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Counter
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/CreateOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Office
+                    </NavLink>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createOfficeLevel"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Office Level
                     </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/createEmployee" style={{textDecoration:"none"}}>Create Employee</NavLink>
-                  </li>
+                  </a>
+                  <hr />
+                  <a>
+                    <NavLink
+                      to="/createEmployee"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Employee
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
-                  <NavLink to="/alloteEmployeeOffice" style={{textDecoration:"none"}}> Allote Employee Office Or section</NavLink>
-                  </li>
+                  <a>
+                    <NavLink
+                      to="/alloteEmployeeOffice"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office Or section
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
-                  <NavLink to="/alloteOfficeRole" style={{textDecoration:"none"}}>Allote Employee Office/Section Role</NavLink>
-                  </li>
+                  <a>
+                    <NavLink
+                      to="/alloteOfficeRole"
+                      style={{ textDecoration: "none", color: "#2e415c" }}
+                    >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Employee Office/Section Role
+                    </NavLink>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/CreatePassword"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
                       Create Employee Password
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/ResetEmplPwd"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Reset Employee Password
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Reset Employee Password
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/Section"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Create Section
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Create Section
                     </NavLink>
-                  </li>
+                  </a>
+                  <hr />
 
-                  <li>
+                  <a>
                     <NavLink
                       to="/admin/counter_allotement"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Allote Counter To User
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Allote Counter To User
                     </NavLink>
-                  </li>
-                  <li>
+                  </a>
+                  <hr />
+                  <a>
                     <NavLink
                       to="/admin/countercat_mapping"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "#2e415c" }}
                     >
-                       Counter Category Mapping
+                      <img
+                        style={{ height: "4vh", width: "4vw" }}
+                        src="/Images/icons8-arrow-48.png"
+                      />
+                      Counter Category Mapping
                     </NavLink>
-                  </li>
-                </ul>
+                  </a>
+                </div>
+                <hr />
               </Col>
-
-              <Col md={9} style={{borderRadius:'3px', border:'1px solid black'}}>
-                <div>
-                  {/* <label>आवेदन की स्थिति हेतु आवेदन नंबर डालें : </label>
-                  <input /> */}
-
-                  {/* <Button>देखें </Button> */}
+              &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+              <Col
+                md={8}
+                style={{
+                  borderRadius: "3px",
+                  border: "1px solid black",
+                  marginTop: "40px",
+                }}
+              >
+                <div
+                  className="bg-success  text-center mt-3 mb-3 "
+                  style={{
+                    height: "10vh",
+                    fontSize: "35px",
+                    color: "white",
+                    fontFamily: "Times New Roman,Arial, sans-serif",
+                  }}
+                >
+                  Allote Employee Office or Section Role
                 </div>
                 <Form>
-                  <div>
-                    <h5 className="text-center">Allote Employee Office or Section Role</h5>
-                    <div className="form-group">
-                      <label for="Country">Country : </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedCountry}
-                        onChange={(event) =>
-                          setSelectedCountry(event.target.value)
-                        }
-                      >
-                        <option value="">Select a country</option>
-                        {country.map((country) => (
-                          <option key={country.value} value={country.value}>
-                            {country.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label for="Country">State :  </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedState}
-                        onChange={(event) =>
-                          setSelectedState(event.target.value)
-                        }
-                      >
-                        <option value="">Select a State</option>
-                        {state.map((state) => (
-                          <option key={state.value} value={state.value}>
-                            {state.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label for="Country">District : </label>
-                      <select
-                        class="form-control custom-select browser-default"
-                        value={selectedDistrict}
-                        onChange={(event) =>
-                          setSelectedDistrict(event.target.value)
-                        }
-                      >
-                        <option value="">Select a district</option>
-                        {district.map((district) => (
-                          <option key={district.value} value={district.value}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label for="State">BaseDept : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedBasedepartment}
-                      onChange={(event) =>
-                        setSelectedBasedepartment(event.target.value)
-                      }
-                    >
-                      <option value="">Select a department </option>
-                      {basedepartment.map((basedept) => (
-                        <option key={basedept.value} value={basedept.value}>
-                          {basedept.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Employee : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedEmployee}
-                      onChange={(event) =>
-                        setSelectedEmployee(event.target.value) 
-                      }
-                    >
-                      <option value="">Select a Employee </option>
-                      {employee.map((empl) => (
-                        <option
-                          key={empl.employee_id}
-                          value={empl.employee_id}
+                  <Row>
+                    <Col>
+                     
+                        <Form.Label for="Country">Country : </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedCountry}
+                          onChange={(event) =>
+                            setSelectedCountry(event.target.value)
+                          }
                         >
-                          {empl.designation_name}/{empl.employee_name}/{empl.employee_id}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                          <option value="">Select a country</option>
+                          {country.map((country) => (
+                            <option key={country.value} value={country.value}>
+                              {country.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      
+                    </Col>
+                    <Col>
+                      
+                        <Form.Label for="Country">State : </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedState}
+                          onChange={(event) =>
+                            setSelectedState(event.target.value)
+                          }
+                        >
+                          <option value="">Select a State</option>
+                          {state.map((state) => (
+                            <option key={state.value} value={state.value}>
+                              {state.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                   
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      
+                        <Form.Label for="Country">District : </Form.Label>
+                        <Form.Select
+                          class="form-control custom-select browser-default"
+                          value={selectedDistrict}
+                          onChange={(event) =>
+                            setSelectedDistrict(event.target.value)
+                          }
+                        >
+                          <option value="">Select a district</option>
+                          {district.map((district) => (
+                            <option key={district.value} value={district.value}>
+                              {district.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      
+                    </Col>
+                    <Col>
+                      
+                        <Form.Label for="State">BaseDept : </Form.Label>
+                        <Form.Select
+                          class="form-control custom-select browser-default"
+                          value={selectedBasedepartment}
+                          onChange={(event) =>
+                            setSelectedBasedepartment(event.target.value)
+                          }
+                        >
+                          <option value="">Select a department </option>
+                          {basedepartment.map((basedept) => (
+                            <option key={basedept.value} value={basedept.value}>
+                              {basedept.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      
+                    </Col>
+                  </Row>
+                  <br />
+                  <Row>
+                    <Col>
+                      
+                        <Form.Label>Employee : </Form.Label>
+                        <Form.Select
+                          class="form-control"
+                          value={selectedEmployee}
+                          onChange={(event) =>
+                            setSelectedEmployee(event.target.value)
+                          }
+                        >
+                          <option value="">Select a Employee </option>
+                          {employee.map((empl) => (
+                            <option
+                              key={empl.employee_id}
+                              value={empl.employee_id}
+                            >
+                              {empl.designation_name}/{empl.employee_name}/
+                              {empl.employee_id}
+                            </option>
+                          ))}
+                        </Form.Select>
+                    
+                    </Col>
+                    <Col>
+                      
+                        <Form.Label>Designation : </Form.Label>
+                        <Form.Select
+                          class="form-control custom-select browser-default"
+                          value={selectedDesignation}
+                          onChange={(event) =>
+                            setSelectedDesignation(event.target.value)
+                          }
+                        >
+                          <option value="">Select a Designation </option>
+                          {designation.map((design) => (
+                            <option key={design.value} value={design.value}>
+                              {design.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                    
+                    </Col>
+                  </Row>
+                </Form>
 
-                  <div className="form-group">
-                    <label>Designation : </label>
-                    <select
-                      class="form-control custom-select browser-default"
-                      value={selectedDesignation}
-                      onChange={(event) =>
-                        setSelectedDesignation(event.target.value)
-                      }
-                    >
-                      <option value="">Select a Designation </option>
-                      {designation.map((design) => (
-                        <option key={design.value} value={design.value}>
-                          {design.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                
-                    <br />
+                <br />
 
-                    <Table striped bordered hover>
-                    <thead>
-                          <tr>
-                            <th>
-                              Select
-                            </th>
-                            <th>Roll</th>
-                          
-                          </tr>
-                    </thead>
-                    <tbody>
-                     {role.map((item) => (
-                        <tr>
-                          <td><input type ="checkbox" value={selectedRole} 
-                          onChange ={(e)=>handleSubmit(e,item)}
-                           
-                          
-
-                            /></td>
-                          <td>{item.name}</td>
-                        </tr>
-                     ))}
-                    </tbody>
-                  </Table>
-                  </Form>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Roll</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {role.map((item) => (
+                      <tr>
+                        <td>
+                          <input
+                            type="checkbox"
+                            value={selectedRole}
+                            onChange={(e) => handleSubmit(e, item)}
+                          />
+                        </td>
+                        <td>{item.name}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
               </Col>
             </Row>
           </Col>

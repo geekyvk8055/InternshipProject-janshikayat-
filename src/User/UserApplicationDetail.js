@@ -33,7 +33,8 @@ const UserApplicationDetail = () => {
 
   return (
     <>
-      <Container>
+      <Container fluid>
+      <h2 className="text-center mb-5 mt-5">User Application Details Table</h2>
         <Table striped bordered hover>
           <thead>
             <tr>

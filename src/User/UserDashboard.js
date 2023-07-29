@@ -5,7 +5,8 @@ import { BucketFill } from "react-bootstrap-icons";
 import axios from "axios";
 import { set } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 //import LoginandNotice from './Homepage/LoginandNotice'
 
 const UserDashboard = (props) => {
@@ -17,7 +18,7 @@ const UserDashboard = (props) => {
   const [applicantId, setApplicantId] = useState([]);
   const [applicantName, setApplicantName] = useState("");
   const [applicantAdd, setApplicantAdd] = useState("");
-  const [applicantMob, setApplicantMob] = useState("");
+  const [applicantMob, setApplicantMob] = useState();
   const [applicantCat, setApplicantCat] = useState([]);
   const [selectedApplicant, setSelectedApplicant] = useState([]);
   const [applicantPassword, setApplicantPassword] = useState([]);
@@ -25,17 +26,17 @@ const UserDashboard = (props) => {
   const [subject, setSubject] = useState([]);
   const [selfCategory, setSelfCategory] = useState('');
   const [pwd, setPwd] = useState();
-  const[selectedUpload, setSelectedUpload] = useState('');
+  const [selectedUpload, setSelectedUpload] = useState();
 
 
 
- 
+
 
   const handlenameChange = (e) => {
     setApplicantName(e.target.value)
   }
 
-   const handleFileUpload = (event) => {
+  const handleFileUpload = (event) => {
     const file = event.target.files[0];
     // Perform file upload logic
     console.log('Uploading file:', file);
@@ -77,25 +78,25 @@ const UserDashboard = (props) => {
 
   }, []
   );
-  useEffect ( () => {
-  const fetchinfo = async () => {
-    console.log(pwd)
+  useEffect(() => {
+    const fetchinfo = async () => {
+      console.log(pwd)
 
-    const response = await axios.get(`https://localhost:44333/api/Master/getuserpass/${pwd}`);
-    if (selfCategory === "1") {
-      setApplicantName(response.data?.table?.[0]?.applicant_name);
-      setApplicantMob(response.data?.table?.[0]?.mobile_no);
-      setApplicantAdd(response.data?.table?.[0]?.applicant_address);
-      setSelectedDistrict(response.data?.table?.[0]?.applicant_district);
-      setSelectedState(response.data?.table?.[0]?.applicant_state);
-    } else {
-      setApplicantName("");
-      setApplicantMob("");
-      setApplicantAdd("");
-    }
-    console.log(pwd);
-  };
-},[]);
+      const response = await axios.get(`https://localhost:44333/api/Master/getuserpass/${pwd}`);
+      if (selfCategory === "1") {
+        setApplicantName(response?.data?.table?.[0]?.applicant_name);
+        setApplicantMob(response?.data?.table?.[0]?.mobile_no);
+        setApplicantAdd(response?.data?.table?.[0]?.applicant_address);
+        setSelectedDistrict(response?.data?.table?.[0]?.applicant_district);
+        setSelectedState(response?.data?.table?.[0]?.applicant_state);
+      } else {
+        setApplicantName("");
+        setApplicantMob("");
+        setApplicantAdd("");
+      }
+      console.log(pwd);
+    };
+  }, []);
 
 
 
@@ -131,7 +132,7 @@ const UserDashboard = (props) => {
           file_uploaded: selectedUpload,
           client_ip: "",
           user_id: "",
-          accepted: "Y",
+          accepted: "A",
           new_application_district: "",
           new_forworded_district: "",
           applicant_state_id: selectedState,
@@ -141,12 +142,21 @@ const UserDashboard = (props) => {
           reason: "",
           mode: "",
           applied_for: selfCategory,
-          random_no: ""
+          mobile_no: applicantMob
         }
+
       );
+      alert("Submitted Successfully");
+      toast.success('POST request successful!', {
+        position: toast.POSITION.TOP_CENTER
+      });
       // console.log({datafromapi});
       console.log(response.data); // do something with the response data
     } catch (error) {
+      alert("Please Fill All Required Fields");
+      toast.error('POST request failed!', {
+        position: toast.POSITION.TOP_CENTER
+      });
       console.log(error); // handle error
     }
   };
@@ -154,42 +164,62 @@ const UserDashboard = (props) => {
   console.log(location);
   return (
     <>
-      <Container >
+      <Container fluid style={{ backgroundImage: 'url("/Images/image_admin_bg.jpg")' }}>
         <Row>
           <Col md={12}>
             <Row>
-              <Col md={4} style={{ marginTop: '25px' }}>
+              <Col md={3} style={{  borderTopColor: '#f39c12',background: '#eaf9ff', border: "1px solid grey",
+                  boxShadow: "1px 1px 5px 3px grey" }}>
                 <div style={{
-                  background: "red",
-                  //alignItems: "center",
-                  //justifyContent: "center",
-                  borderRadius: "5px",
-                  height: '35px'
+                  
                 }}>
-                  <h5
-                    className="text-center"
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
+                  <div style={{
+                    marginTop: '25px',
+                    background: "#017e7e",
+                    textAlign: 'center',
+                    borderTopLeftRadius: "5px",
+                    //borderTopRightRadius:'5px',
 
-                  >
+                    height: '6vh',
+                    fontSize: '22px',
+                    fontWeight: 'bold',
+                    color: 'white'
+
+                  }}>
+
+
+
+
                     ऑनलईन जनशिकायत
-                  </h5>
-                </div>
-                <ul className="adminList">
-                  <li>
-                    <NavLink to="/user/dashboard" style={{ textDecoration: "none" }}>
+
+                  </div>
+                  <hr />
+                  <a>
+                    <NavLink to="/user/dashboard" style={{ textDecoration: "none", fontSize:'17px' }}>
+                      <img style={{ height: '4vh', width: '4vw' }} src="/Images/icons8-arrow-48.png" />
                       शिकायत पंजीयन
                     </NavLink>
-                  </li>
-                  <li>
+                  </a>
+                  <hr />
+                  <a>
+                    <img style={{ height: '4vh', width: '4vw' }} src="/Images/icons8-arrow-48.png" />
                     <NavLink
                       to="/user/applicant_detail"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", fontSize:'17px' }}
                     >
                       आवेदन विवरण
                     </NavLink>
-                  </li>
-                </ul>
+                  </a>
+                  <hr />
+                  <br />
+                </div>
+
+
               </Col>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {/* <Col md={1}></Col>*/}
               <Col
                 md={8}
                 style={{
@@ -198,10 +228,10 @@ const UserDashboard = (props) => {
                   alignItems: "center",
                   marginTop: "25px",
                   marginBottom: "25px",
-
-                  borderRadius: "10px",
-                  border: "1px solid black",
-                  boxShadow: "2px -2px 20px 4px black",
+                  borderTopRightRadius: "5px",
+                  borderTopLeftRadius:'5px',
+                  border: "1px solid grey",
+                  boxShadow: "1px 1px 5px 3px grey",
                 }}
               >
                 <Form>
@@ -213,20 +243,22 @@ const UserDashboard = (props) => {
                             md={12}
                             style={{
                               textAlign: "center",
-                              backgroundImage:
-                                "url('https://i.pinimg.com/originals/5e/76/0c/5e760cba5e9ca01ed6249f1ea49cb104.png')",
-                              borderTopLeftRadius: "10px",
-                              borderTopRightRadius: "10px",
+                              background: '#017e7e',
+
+                              // backgroundImage:
+                              //   "url('https://i.pinimg.com/originals/5e/76/0c/5e760cba5e9ca01ed6249f1ea49cb104.png')",
+                              borderTopLeftRadius: "5px",
+                              borderTopRightRadius: "5px",
                               marginBottom: "50px",
                             }}
                           >
                             <h4
                               className="mt-3"
-                              style={{ fontWeight: "bolder" }}
+                              style={{ fontWeight: "bolder", color: 'white' }}
                             >
-                              <i style={{ color: "#6F1E1A" }}>
-                                आवेदक / आवेदन  का वर्णन
-                              </i>
+
+                              आवेदक / आवेदन  का वर्णन
+
                             </h4>
                           </Col>
                         </Row>
@@ -267,10 +299,10 @@ const UserDashboard = (props) => {
                                 <span style={{ color: "red" }}>*</span> :
                               </Form.Label>
                               <Form.Control
-                                value={applicantName}
+                                defaultValue={applicantName}
                                 onChange={handlenameChange}
                                 placeholder="Enter your name."
-                                required
+                                data-val-required="please enter name"
                               />
                             </Form.Group>
                           </Col>
@@ -283,14 +315,15 @@ const UserDashboard = (props) => {
                                 आवेदक का मोबाईल नंबर <span style={{ color: "red" }}>*</span>
                               </Form.Label>
                               <Form.Control
-                                value={applicantMob}
-                                onChange={(event) =>
-                                  applicantMob(event.target.value)
-                                }
-                                type="email"
+
+                                type="number"
                                 class="form-control"
-                                name="email"
+                                name="mobile"
                                 placeholder="Enter your mobile."
+                                defaultValue={applicantMob}
+                                onChange={(event) =>
+                                  setApplicantMob(event.target.value)
+                                }
                                 required
                               />
                             </Form.Group>
@@ -417,35 +450,33 @@ const UserDashboard = (props) => {
                         </Row>
 
                         <br />
-                      
+
                         क्या आप फाइल अपलोड करना चाहते हैं  :   <input
                           type="radio"
                           name="category"
                           value="N"
                           checked={selectedUpload === "N"}
                           onChange={(event) =>
-                          setSelectedUpload(event.target.value)
-                          }
+                            setSelectedUpload(event.target.value)}
                         /> No
 
                         &nbsp;&nbsp;
-                      
-                   
-                          <label>
-                        <input
-                          type="radio"
-                          name="category"
-                          value="Y"
-                          checked={selectedUpload==="Y"}
-                          onChange={(event) =>
-                          setSelectedUpload(event.target.value)
-                          }
 
-                        /> Yes
+
+                        <label>
+                          <input
+                            type="radio"
+                            name="category"
+                            value="Y"
+                            checked={selectedUpload === "Y"}
+                            onChange={(event) =>
+                              setSelectedUpload(event.target.value)}
+
+                          /> Yes
                         </label>
                         &nbsp;&nbsp;
-                         {selectedUpload === 'Y' && (
-                        <input type="file" onChange={handleFileUpload} />
+                        {selectedUpload === 'Y' && (
+                          <input type="file" onChange={handleFileUpload} />
                         )}
                         <br />
                         <br />

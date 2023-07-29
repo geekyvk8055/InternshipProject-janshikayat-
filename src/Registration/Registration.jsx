@@ -107,12 +107,12 @@ const currentdate = new Date();
           background: "whitesmoke",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "25px",
-          marginBottom: "25px",
+          marginTop: "50px",
+          marginBottom: "50px",
 
           borderRadius: "10px",
           border: "1px solid black",
-          boxShadow: "2px -2px 20px 4px black",
+          boxShadow: "1px 1px 10px 2px grey",
         }}
       >
         <Form>
@@ -124,16 +124,17 @@ const currentdate = new Date();
                     md={12}
                     style={{
                       textAlign: "center",
-                      backgroundImage:"url('https://i.pinimg.com/originals/5e/76/0c/5e760cba5e9ca01ed6249f1ea49cb104.png')",
+                      background:'#017e7e',
+                      //backgroundImage:"url('https://i.pinimg.com/originals/5e/76/0c/5e760cba5e9ca01ed6249f1ea49cb104.png')",
                       borderTopLeftRadius: "10px",
                       borderTopRightRadius: "10px",
                       marginBottom: "50px",
                     }}
                   >
-                    <h4 className="mt-3" style={{ fontWeight: "bolder" }}>
-                      <i style={{ color: "#6F1E1A" }}>
-                        <marquee>ऑनलाइन जनशिकायत रजिस्ट्रेशन फॉर्म</marquee>
-                      </i>
+                    <h4 className="mt-3" style={{ fontWeight: "bolder",color:'white' }}>
+                      
+                     ऑनलाइन जनशिकायत रजिस्ट्रेशन फॉर्म
+                     
                     </h4>
                   </Col>
                 </Row>
@@ -175,7 +176,7 @@ const currentdate = new Date();
                 <br />
                 <Row>
                   <Col md={6}>
-                    <Form.Label for="cod">आवेदक श्रेणी<span style={{color:'red'}}>*</span>  </Form.Label>
+                    <Form.Label for="cod">आवेदक श्रेणी  </Form.Label>
                     <Form.Select
                       class="form-control browser-default custom-select"
                       value={selectedApplicant}
@@ -212,7 +213,7 @@ const currentdate = new Date();
                 <Row>
                   <Col md={6}>
 
-                  <Form.Label for="State">जिला  </Form.Label>
+                  <Form.Label for="State">जिला <span style={{color:'red'}}>*</span> :  </Form.Label>
                   <Form.Select
                     class="form-control custom-select browser-default"
                     value={selectedDistrict}
@@ -248,7 +249,7 @@ const currentdate = new Date();
 
                 <Row>
                   <Col md ={6}>
-                  <Form.Label for="tel">Phone </Form.Label>
+                  <Form.Label for="tel">Phone <span style={{color:'red'}}>*</span> :</Form.Label>
                   <Form.Control
                     value={applicantMob}
                     onChange={(event) => setApplicantMob(event.target.value)}
@@ -264,7 +265,7 @@ const currentdate = new Date();
                   
                   <Col md={6}>
 
-                  <Form.Label for="tel">यूजर आइडी </Form.Label>
+                  <Form.Label for="tel">यूजर आइडी <span style={{color:'red'}}>*</span> : </Form.Label>
                   <Form.Control
                     value={applicantId}
                     onChange={(event) => setApplicantId(event.target.value)}
@@ -282,7 +283,7 @@ const currentdate = new Date();
                 <br />
                <Row>
                 <Col md={6}>
-                  <label for="pass">Password</label>
+                  <label for="pass">Password <span style={{color:'red'}}>*</span> :</label>
                   <input
                     value={applicantPassword}
                     onChange={(event) =>
@@ -295,11 +296,12 @@ const currentdate = new Date();
                     placeholder="Enter your password."
                     required
                   />
+                  <span style={{color:'red'}}>Note: Password Should Be Minimum 8 Characters</span>
                 </Col>
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label htmlFor="inputPassword5">
-                      Confirm Password
+                      Confirm Password <span style={{color:'red'}}>*</span> :
                     </Form.Label>
                     <Form.Control
                       // value={ver}

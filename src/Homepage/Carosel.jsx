@@ -3,7 +3,7 @@ import { Container, Card, Button } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
+import Marquee from "react-fast-marquee";
 
 function Carosel() {
   const [index, setIndex] = useState(0);
@@ -12,14 +12,13 @@ function Carosel() {
     setIndex(selectedIndex);
   };
 
- 
   const [isHovering, setIsHovering] = useState(false);
   const [distance, setDistance] = useState(0);
 
   useEffect(() => {
     const frame = () => {
       if (!isHovering) {
-        setDistance(distance => (distance + 0.5) % 100);
+        setDistance((distance) => (distance + 0.5) % 100);
       }
       requestAnimationFrame(frame);
     };
@@ -33,9 +32,6 @@ function Carosel() {
   const handleMouseLeave = () => {
     setIsHovering(false);
   };
-
-
-
 
   return (
     <>
@@ -92,21 +88,6 @@ function Carosel() {
                   </Carousel>
                 </Col>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <Col md={4} sm={12}>
                   <Row>
                     <div
@@ -122,7 +103,7 @@ function Carosel() {
                     >
                       Important Links
                     </div>
-                    
+
                     <Col
                       id="card"
                       style={{
@@ -135,260 +116,271 @@ function Carosel() {
                       }}
                     >
                       <Row>
-                      <div
-      // className="marquee"
-      // style={{ top: `${distance}%` }}
-      // onMouseEnter={handleMouseEnter}
-      // onMouseLeave={handleMouseLeave}
-    >
-                        <Col md={12} className="mar">
-                          <Row>
-                            <Col
-                              style={
-                                {
-                                  // textAlign: "center",
-                                  // display: "flex",
-                                  // justifyContent: "center",
-                                  // alignItems: "center",
-                                }
-                              }
-                            >
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  color: "white",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  backgroundRepeat: "round",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVZIBn2nOm_AO3M4QLFzIU-_ErwI7GY9ZTNp0_tjPmSGR262OCyZvyJZkD0xxcj-DIoDA&usqp=CAU"
-                                  height={140}
-                                  className="bg-white"
-                                />
-                                <Card.Body>
-                                  <a href="#Home" target={"_blank"}>
-                                    <Button
-                                      variant="success"
-                                      style={{ fontSize: "15px" }}
-                                    >
-                                      दैनिक कार्यवाही
-                                    </Button>
-                                  </a>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                        <div
+                        // className="marquee"
+                        // style={{ top: `${distance}%` }}
+                        // onMouseEnter={handleMouseEnter}
+                        // onMouseLeave={handleMouseLeave}
+                        >
+                          <Col md={12} className="mar">
+                            <Row>
+                             
+                                <Col
+                                  style={
+                                    {
+                                      // textAlign: "center",
+                                      // display: "flex",
+                                      // justifyContent: "center",
+                                      // alignItems: "center",
+                                    }
+                                  }
+                                >
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      color: "white",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      backgroundRepeat: "round",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVZIBn2nOm_AO3M4QLFzIU-_ErwI7GY9ZTNp0_tjPmSGR262OCyZvyJZkD0xxcj-DIoDA&usqp=CAU"
+                                      height={140}
+                                      className="bg-white"
+                                    />
+                                    <Card.Body>
+                                      <a href="#Home" target={"_blank"}>
+                                        <Button
+                                          variant="success"
+                                          style={{ fontSize: "15px" }}
+                                        >
+                                          दैनिक कार्यवाही
+                                        </Button>
+                                      </a>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
-                            <Col
-                              style={
-                                {
-                                  // textAlign: "center",
-                                  // display: "flex",
-                                  // justifyContent: "center",
-                                  // alignItems: "center",
-                                }
-                              }
-                            >
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  color: "white",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  src="https://icon-library.com/images/district-icon/district-icon-22.jpg"
-                                  height={140}
-                                />
-                                <Card.Body>
-                                  <NavLink to="DistrictList" target={"_blank"}>
-                                    <Button variant="success">जिला सूची</Button>
-                                  </NavLink>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                                <Col
+                                  style={
+                                    {
+                                      // textAlign: "center",
+                                      // display: "flex",
+                                      // justifyContent: "center",
+                                      // alignItems: "center",
+                                    }
+                                  }
+                                >
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      src="https://icon-library.com/images/district-icon/district-icon-22.jpg"
+                                      height={140}
+                                    />
+                                    <Card.Body>
+                                      <NavLink
+                                        to="DistrictList"
+                                        target={"_blank"}
+                                      >
+                                        <Button variant="success">
+                                          जिला सूची
+                                        </Button>
+                                      </NavLink>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
-                            <Col
-                              style={
-                                {
-                                  // textAlign: "center",
-                                  // display: "flex",
-                                  // justifyContent: "center",
-                                  // alignItems: "center",
-                                }
-                              }
-                            >
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  color: "white",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  style={{
-                                    background: "white",
-                                    height: "140px",
-                                  }}
-                                  src="Images\department.png"
-                                />
-                                <Card.Body>
-                                  <NavLink to="/DepartmentList" target={"_blank"}>
-                                    <Button variant="success">
-                                      विभाग सूची
-                                    </Button>
-                                    </NavLink>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                                <Col
+                                  style={
+                                    {
+                                      // textAlign: "center",
+                                      // display: "flex",
+                                      // justifyContent: "center",
+                                      // alignItems: "center",
+                                    }
+                                  }
+                                >
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      style={{
+                                        background: "white",
+                                        height: "140px",
+                                      }}
+                                      src="Images\department.png"
+                                    />
+                                    <Card.Body>
+                                      <NavLink
+                                        to="/DepartmentList"
+                                        target={"_blank"}
+                                      >
+                                        <Button variant="success">
+                                          विभाग सूची
+                                        </Button>
+                                      </NavLink>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
-                            <Col
-                              style={
-                                {
-                                  //  textAlign: "center"
-                                }
-                              }
-                            >
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  color: "white",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  height="140px"
-                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrGYsTatTkc4mLJ3K8UQagj3u--r1jcdr9XmPWEKUVRFXcwmcQavd9Td0fLNYFAcCXnnE&usqp=CAU"
-                                />
-                                <Card.Body>
-                                  <NavLink to="/reports/OfficeList" target={"_blank"}>
-                                    <Button variant="success">
-                                      ऑफिस सूची{" "}
-                                    </Button>
-                                  </NavLink>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                                <Col
+                                  style={
+                                    {
+                                      //  textAlign: "center"
+                                    }
+                                  }
+                                >
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      height="140px"
+                                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrGYsTatTkc4mLJ3K8UQagj3u--r1jcdr9XmPWEKUVRFXcwmcQavd9Td0fLNYFAcCXnnE&usqp=CAU"
+                                    />
+                                    <Card.Body>
+                                      <NavLink
+                                        to="/reports/OfficeList"
+                                        target={"_blank"}
+                                      >
+                                        <Button variant="success">
+                                          ऑफिस सूची{" "}
+                                        </Button>
+                                      </NavLink>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
-                            <Col style={{}}>
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  color: "white",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  style={{
-                                    background: "white",
-                                    height: "140px",
-                                  }}
-                                  src="Images\user.png"
-                                />
-                                <Card.Body>
-                                  <a href="#Home" target={"_blank"}>
-                                    <Button variant="success">
-                                      ऑफिसर सूची
-                                    </Button>
-                                  </a>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                                <Col style={{}}>
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      style={{
+                                        background: "white",
+                                        height: "140px",
+                                      }}
+                                      src="Images\user.png"
+                                    />
+                                    <Card.Body>
+                                      <a href="#Home" target={"_blank"}>
+                                        <Button variant="success">
+                                          ऑफिसर सूची
+                                        </Button>
+                                      </a>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
-                            <Col
-                              style={
-                                {
-                                  // textAlign: "center"
-                                }
-                              }
-                            >
-                              <Card
-                                style={{
-                                  width: "12vw",
-                                  // margin: "2px",
-                                  textAlign: "center",
-                                  backgroundImage:
-                                    'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                                  color: "white",
-                                }}
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  style={{
-                                    background: "white",
-                                    height: "140px",
-                                  }}
-                                  src="Images\office-officer.webp"
-                                />
-                                <Card.Body>
-                                  <a href="#Home" target={"_blank"}>
-                                    <Button
-                                      variant="success"
-                                      style={{ fontSize: "11px" }}
-                                    >
-                                      ऑफिस/ऑफिसरसूची
-                                    </Button>
-                                  </a>
-                                </Card.Body>
-                              </Card>
-                            </Col>
+                                <Col
+                                  style={
+                                    {
+                                      // textAlign: "center"
+                                    }
+                                  }
+                                >
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      style={{
+                                        background: "white",
+                                        height: "140px",
+                                      }}
+                                      src="Images\office-officer.webp"
+                                    />
+                                    <Card.Body>
+                                      <a href="#Home" target={"_blank"}>
+                                        <Button
+                                          variant="success"
+                                          style={{ fontSize: "11px" }}
+                                        >
+                                          ऑफिस/ऑफिसरसूची
+                                        </Button>
+                                      </a>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
 
+                                <Col>
+                                  <Card
+                                    style={{
+                                      width: "12vw",
+                                      // margin: "2px",
+                                      textAlign: "center",
+                                      backgroundImage:
+                                        'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
+                                      color: "white",
+                                    }}
+                                  >
+                                    <Card.Img
+                                      variant="top"
+                                      style={{
+                                        background: "white",
+                                        height: "130px",
+                                      }}
+                                      src="Images\rti.webp"
+                                    />
+                                    <Card.Body>
+                                      {/* <Card.Title>आर.टी.आई.</Card.Title> */}
+                                      <a href="#Home" target={"_blank"}>
+                                        <Button variant="success">
+                                          आर.टी.आई.
+                                        </Button>
+                                      </a>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
                             
-
-                            <Col >
-                          <Card
-                            style={{
-                              width: "12vw",
-                              // margin: "2px",
-                              textAlign: "center",
-                              backgroundImage:
-                                'url("https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?w=360")',
-                              color: "white",
-                            }}
-                          >
-                            <Card.Img
-                              variant="top"
-                              style={{ background: "white", height: "130px" }}
-                              src="Images\rti.webp"
-                            />
-                            <Card.Body>
-                              {/* <Card.Title>आर.टी.आई.</Card.Title> */}
-                              <a href="#Home" target={"_blank"}>
-                                <Button variant="success">आर.टी.आई.</Button>
-                              </a>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-
-
-                          </Row>
-                        </Col>
+                            </Row>
+                          </Col>
                         </div>
-
-                        
                       </Row>
                     </Col>
-                    
                   </Row>
                 </Col>
               </Row>

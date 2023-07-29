@@ -38,7 +38,11 @@ import UserApplicationDetailComp from "./UserApplicationDetailComp";
 import ShowLetter from "./CmHouse/ShowLetter";
 import ShowLetterComp from "./ShowLetterComp";
 import ShowLetter2Comp from "./ShowLetter2Comp";
-import PendingLettersComp from "./PendingLetterComp";
+
+import PendingLetterComp from "./PendingLetterComp";
+import PendingLetterListComp from "./PendingLetterListComp";
+import Action_PendingLetterComp from "./Action_PendingLetterComp";
+
 
 //import AdminRouting from "./AdminRouting";
 
@@ -73,7 +77,11 @@ const App = () => {
       //  CmHouse Routing
       <Route path="/cmHouse" element={<ShowLetterComp />} />
       <Route path="/cmHouse/ShowLetter" element={<ShowLetter2Comp />} />
-      <Route path="/cmHouse2/PendingLetters" element={<PendingLettersComp />} />
+     
+      <Route path="/PendingLetter" element={<PendingLetterComp />} />
+
+      <Route path="/PendingList" element={<PendingLetterListComp />} />
+      <Route path="/PendingList/ActionPendingLetters" element={<Action_PendingLetterComp />} />
 
       
 

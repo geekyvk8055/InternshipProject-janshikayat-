@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import {Card, Container } from "react-bootstrap";
 import {
   Alert,
   Button,
@@ -35,22 +35,11 @@ const AvedanLink = () => {
 
   return (
     <>
-      <Container fluid className="registration mt-5">
-        <div
-          class="container "
-          style={{
-            height: "500px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <form>
-            <div
-              class="row jumbotron box8"
-              style={{ height: "400px", width: "50vw" }}
-            >
-              <div class="col-sm-12 mx-t3">
+      <Container fluid className="registration " style={{background:"whitesmoke"}}>
+     
+        <div className="d-flex justify-content-center">
+         <Card className="mt-3 mb-3" style={{width:'41rem'}}>
+         <div class="col-sm-12 mx-t3">
                 <div
                   style={{
                     backgroundImage:
@@ -63,11 +52,20 @@ const AvedanLink = () => {
                     borderRadius: "5px",
                   }}
                 >
-                  <h5 class="text-center text-white mt-3" style={{}}>
-                    आवेदन की स्थिति देखें{" "}
+                  <h5 class="text-center text-white " style={{}}>
+                  <b>
+                    आवेदन की स्थिति देखें
+                    </b>
                   </h5>
                 </div>
               </div>
+      <Card.Body>
+          <form>
+            <div
+              class="row jumbotron box8"
+            
+            >
+              
               <div class="col-sm-12 form-group">
                 <label for="name-f">Enter Your Application Number </label>
                 <input
@@ -75,7 +73,7 @@ const AvedanLink = () => {
                   class="form-control"
                   name="fname"
                   id="name-f"
-                  placeholder="Enter your first name."
+                  
                   required
                 />
               </div>
@@ -120,12 +118,16 @@ const AvedanLink = () => {
                       </Button>
                     </form>
                   </CardContent>
+                  
                 </div>
               </div>
               
             </div>
           </form>
+          </Card.Body>
+        </Card>
         </div>
+       
       </Container>
     </>
   );

@@ -33,99 +33,98 @@ const Reports = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [employeeId, setEmployeeId] = useState('');
-  const [userData, setuserData] = useState([]);
-  const [userDataOne, setuserDataOne] = useState([]);
+  const [userData, setuserData] = useState('');
+  const [userDataOne, setuserDataOne] = useState('');
+  const [userDataTwo, setUserDataTwo] = useState('');
   const navigate = useNavigate();
+  const [visitors, setVisitors] = useState(0);
 
 
 
 
 
   const handleSubmit = async (e) => {
-
+    console.log("any");
     e.preventDefault();
-
-
+    
+  
     try {
-
-      axios.all([
+      const [userResponse, employeeResponse, complaintResponse] = await axios.all([
         axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`),
-        axios.get(`https://localhost:44333/api/Master/getemployee/${username}`)
-      ])
-        .then(axios.spread((firstResponse, secondResponse) => {
-          console.log(firstResponse.data, secondResponse.data);
-          setuserData(firstResponse?.data?.table?.[0]);
-          setuserDataOne(secondResponse?.data?.table?.[0]);
-        }))
-      // const response = await axios.get(`https://localhost:44333/api/UserLogin/GetUser/${username}`);
-      //const userData = firstResponse?.data?.table?.[0];
-
-      // const response1 = await axios.get(`https://localhost:44333/api/Master/getemployee/${username}`);
-      // const userData1 = response1?.data?.table?.[0];
-      // console.log(userData1);
-      // console.log(userData);
-      //const storedHashedPassword = userData.password;
-      //const enteredEncryptedPassword = CryptoJS.SHA256(password).toString();
-
-      // var salt = bcrypt.genSaltSync(10);
-      //var hash = bcrypt.hashSync(password, salt);
-      //const hashedPassword = await bcrypt.hash(password, 10);
-      //console.log(storedHashedPassword);
-      //console.log(enteredEncryptedPassword);
-
-      //const passwordMatch = await  bcrypt.compareSync(hash, storedHashedPassword);
-      if (userData?.password == password) {
+        axios.get(`https://localhost:44333/api/Master/getemployee/${username}`),
+        axios.get(`https://localhost:44333/api/ComplaintDetailTbl/gettotalcomplaintstatusbyid/${username}`)
+      ]);
+  
+      const userData = userResponse?.data?.table?.[0];
+      const userDataOne = employeeResponse?.data?.table?.[0];
+      const userDataTwo = complaintResponse?.data?.table?.[0];
+  
+      if (userData?.password === password) {
+        // Compare entered password with the stored hashed password
+        //const passwordMatch = await bcrypt.compare(password, userData.password);
+        //if (passwordMatch) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Login successful!',
+            text: 'You will be redirected to your dashboard.',
+            showConfirmButton: true,
+            timer: 3000
+          });
+          window.scrollTo(0, 0);
+          console.log('Login successful!');
+          // Redirect to the dashboard page
+          navigate('/user/dashboard', { state: { userData } });
         
-
+        
+      } else if (userDataOne?.employee_mob === password) {
         Swal.fire({
           icon: 'success',
           title: 'Login successful!',
           text: 'You will be redirected to your dashboard.',
           showConfirmButton: true,
           timer: 3000
-        })
-
+        });
         window.scrollTo(0, 0);
         console.log('Login successful!');
-
-
-        // Redirect to the dashboard page
-        navigate('/user/dashboard', { state: { userData } });
-
-
-
-      }
-      else if
-        (userDataOne?.employee_mob === password) {
-        console.log("userData1", userDataOne.employee_mob);
-
+        navigate('/cmHouse', { state: { userDataOne } });
+      } else if (username === 'admin' && password === 'password') {
         Swal.fire({
           icon: 'success',
           title: 'Login successful!',
           text: 'You will be redirected to your dashboard.',
           showConfirmButton: true,
           timer: 3000
-        })
-
-        navigate('/cmHouse', { state: { userDataOne } });
-
-      }
-      else {
+        });
+        window.scrollTo(0, 0);
+        console.log('Login successful!');
+        navigate('/getLogin');
+      } else if (password === 'vinod' && userDataTwo?.userid === username) {
         Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: 'Please Enter Correct Username or Password ',
-          showConfirmButton: false,
-          timer: 2000
-        })
-        //alert('invalid username or password');
-
+          icon: 'success',
+          title: 'Login successful!',
+          text: 'You will be redirected to your dashboard.',
+          showConfirmButton: true,
+          timer: 3000
+        });
+        window.scrollTo(0, 0);
+        console.log('Login successful!');
+        navigate('/PendingLetter', { state: { userDataTwo } });
+      } else {
+        showLoginError();
       }
-
-
     } catch (error) {
       console.log('Login failed:', error);
     }
+  };
+  
+  const showLoginError = () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: 'Please Enter Correct Username or Password',
+      showConfirmButton: false,
+      timer: 2000
+    });
   };
 
 
@@ -175,7 +174,14 @@ const Reports = () => {
 
 console.log(password);
 console.log(userData);
+console.log(userData);
 console.log(userDataOne);
+console.log(userDataTwo);
+
+
+const incrementVisitorCount = () => {
+  setVisitors(visitors + 1);
+}
   return (
     <>
       <Container fluid style={{ background: "#E2E4F1", marginTop: "25px" }}>
@@ -278,7 +284,7 @@ console.log(userDataOne);
 
                             <h3 class="signin-text mb-3"> Sign In</h3>
 
-                            <form >
+                            <form onSubmit={handleSubmit}>
                               <div class="form-group">
                                 <label for="UserId">UserId</label>
                                 <input
@@ -286,6 +292,7 @@ console.log(userDataOne);
                                   type="text"
                                   class="form-control"
                                   value={username}
+
                                   onChange={(e) => setUsername(e.target.value)}
                                 />
                               </div>
@@ -320,10 +327,10 @@ console.log(userDataOne);
                                     <br></br> */}
 
                                 <Button
-                                  onClick={handleSubmit}
+                                  
                                   variant="contained"
                                   color="success"
-
+                                  type="submit"
                                   sx={{ marginTop: "20px" }}
                                 >
 
@@ -349,6 +356,13 @@ console.log(userDataOne);
               </Row>
             </Col>
           </Row>
+
+
+
+          <div className="counter" onClick={incrementVisitorCount}>
+      <p className="count">{visitors}</p>
+      <p className="label">Visitors</p>
+    </div>
         </div>
       </Container>
     </>
