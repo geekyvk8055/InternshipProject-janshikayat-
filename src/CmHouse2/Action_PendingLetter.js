@@ -42,12 +42,12 @@ const Action_PendingLetter = () => {
   , []);
 
 
-console.log(location?.state);
+console.log(location);
 
 
   return (
     <>
-      <Container fluid >
+      <Container fluid style={{ background: "#ecf0f5" }}>
         <Row>
           <Col md={12} >
             <Row>
@@ -103,10 +103,10 @@ console.log(location?.state);
                     </b>
                   </div>
                   <div className="d-flex justify-content-center">
-                  <Table>
-                              <thead>
+                  <Table className='text-center'>
+                              <thead >
 
-                                <tr>
+                                <tr style={{background:'yellow'}}>
                                   <th>
                                     S. NO.
                                   </th>
@@ -119,16 +119,16 @@ console.log(location?.state);
                                      
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody >
                               {tableData?.map((item, index) => (
-                                <tr key={index} >
-                                  <td> {index+1} </td>
-                                  <td> {item.complaintId}</td>
-                                  <td>{item.subject} </td>
-                                   <td> </td>
-                                  <td>{item.complaintAcceptanceDate}</td> 
-                                  <td>Pending</td>
-                                  <td><NavLink>कार्यवाही करें </NavLink></td>
+                                <tr key={index} style={{border:'1px solid black'}}>
+                                  <td style={{border:'1px solid black'}}> {index+1} </td>
+                                  <td style={{border:'1px solid black'}}> {item.complaintId}</td>
+                                  <td style={{border:'1px solid black'}}>{item.subject} </td>
+                                  <td style={{border:'1px solid black'}}> </td>
+                                  <td style={{border:'1px solid black'}}>{item.entryDate}</td> 
+                                  <td style={{border:'1px solid black'}}>Pending</td>
+                                  <td style={{border:'1px solid black'}}><NavLink to="/PendingList/ActionPendingLetters/actionbydept" state={item}>कार्यवाही करें </NavLink></td>
                                   
                                  
                                 </tr>

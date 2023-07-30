@@ -42,6 +42,7 @@ import ShowLetter2Comp from "./ShowLetter2Comp";
 import PendingLetterComp from "./PendingLetterComp";
 import PendingLetterListComp from "./PendingLetterListComp";
 import Action_PendingLetterComp from "./Action_PendingLetterComp";
+import Action_PendingLettersByDepartmentComp from "./Action_PendingLettersByDepartmentComp";
 
 
 //import AdminRouting from "./AdminRouting";
@@ -82,6 +83,7 @@ const App = () => {
 
       <Route path="/PendingList" element={<PendingLetterListComp />} />
       <Route path="/PendingList/ActionPendingLetters" element={<Action_PendingLetterComp />} />
+      <Route path="/PendingList/ActionPendingLetters/actionbydept" element={<Action_PendingLettersByDepartmentComp/>} />
 
       
 

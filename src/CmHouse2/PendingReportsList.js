@@ -145,7 +145,7 @@ const PendingReportsList = () => {
                                   <td>{tableDataOne?.[0]?.order_count} </td>
                                    <td> {tableDataOne?.[1]?.order_count}</td>
                                   <td>{tableDataOne?.[2]?.order_count}</td> 
-                                  <td><NavLink to="/PendingList/ActionPendingLetters" state={location?.state?.userDataTwo?.userid}>{tableDataOne?.[0]?.total_count_all_categories}</NavLink></td>
+                                  <td><NavLink to="/PendingList/ActionPendingLetters" state={location?.state}>{tableDataOne?.[0]?.total_count_all_categories}</NavLink></td>
                                   
                                  
                                 </tr>
