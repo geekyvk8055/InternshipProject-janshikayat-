@@ -239,7 +239,9 @@ const ShowLetter2 = (props) => {
         // console.log({datafromapi});
         console.log(response.data); // do something with the response data
     } catch (error) {
-      console.log(error); // handle error
+      alert('Duplicate Entry!!...Please Try With Another Token Number');
+      console.log(error); 
+    // handle error
     }
   };
   // console.log(selectedOption);
@@ -703,7 +705,7 @@ const ShowLetter2 = (props) => {
                             ></textarea>
                           </div>
                         )}
-                        <Button onClick={handleSubmit}>Submit</Button>
+                        <Button type="submit" onClick={handleSubmit}>Submit</Button>
                       </Col>
                     </Row>
                   </form>

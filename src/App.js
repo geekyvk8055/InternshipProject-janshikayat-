@@ -43,6 +43,7 @@ import PendingLetterComp from "./PendingLetterComp";
 import PendingLetterListComp from "./PendingLetterListComp";
 import Action_PendingLetterComp from "./Action_PendingLetterComp";
 import Action_PendingLettersByDepartmentComp from "./Action_PendingLettersByDepartmentComp";
+import BaseDeptByIdComp from "./BaseDeptByIdComp";
 
 
 //import AdminRouting from "./AdminRouting";
@@ -63,8 +64,11 @@ const App = () => {
       <Route path="/createOffice" element={<CreateOfficeComp />} />
       <Route path="/createOfficeLevel" element={<CreateOfficeLevelComp />} />
       <Route path="/createEmployee" element={<CreateEmployeeComp />} />
+      //Repots
       <Route path="/DistrictList" element={<DistrictListComp />} />
       <Route path="/DepartmentList" element={<DepartmentListComp />} />
+      <Route path="/DepartmentList/byId" element={<BaseDeptByIdComp />} />
+
       <Route path="/reports/OfficeList" element={<OfficeListComp />} />
       <Route path="/alloteEmployeeOffice" element={<AlloteEmplOfficeComp />} />
       <Route path="/alloteOfficeRole" element={<AlloteOffcRoleComp />} />
