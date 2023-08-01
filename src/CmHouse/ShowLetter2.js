@@ -249,7 +249,7 @@ const ShowLetter2 = (props) => {
     <>
       <Container
         fluid
-        style={{ backgroundImage: 'url("/Images/image_admin_bg.jpg")' }}
+        style={{ background: "#ecf0f5" }}
       >
         <Row>
           <Col md={12}>
@@ -290,10 +290,17 @@ const ShowLetter2 = (props) => {
                 <hr />
               </Col>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-              <Col md={9} style={{ border: "1px solid black" }}>
+              <Col md={9} >
                 <div>
                   <form>
-                    <div class="mb-3 ">
+                    <div class="mb-3 " style={{
+                      borderTop: "3px solid #3c8dbc",
+                      padding: "28px",
+                      background: "white",
+                      boxShadow: "1px 1px 2px 1px grey",
+                      borderDownRadius: "2px",
+                      marginTop:"25px"
+                    }}>
                       <Row>
                         <Col md={2}>
                           <label>टोकन नंबर :</label>
@@ -314,7 +321,15 @@ const ShowLetter2 = (props) => {
                     </div>
 
                     {showdata && (
-                      <div>
+                      <div style={{
+                        marginTop: "25px",
+                        marginBottom:"25px",
+                      borderTop: "3px solid #3c8dbc",
+                      padding: "28px",
+                      background: "white",
+                      boxShadow: "1px 1px 2px 1px grey",
+                      borderDownRadius: "2px",
+                    }}>
                         <h3 style={{ textAlign: "center" }}>पत्र का विवरण </h3>
                         <div style={{ marginLeft: "10vw" }}>
                           <Row>
@@ -409,8 +424,18 @@ const ShowLetter2 = (props) => {
                         </div>
                       </div>
                     )}
+                    <div style={{
+                      marginTop:"25px",
+                      marginBottom:"25px",
+                      borderTop: "3px solid #3c8dbc",
+                      padding: "28px",
+                      background: "white",
+                      boxShadow: "1px 1px 2px 1px grey",
+                      borderDownRadius: "2px",
+                    }}>
                     <Row>
                       <Col>
+                      
                         <div className="text-center">
                           Acceptance:&nbsp;&nbsp;&nbsp;&nbsp;
                           <input
@@ -482,11 +507,14 @@ const ShowLetter2 = (props) => {
                               </Form.Select>
                             </div>
                             <div
-                              style={{
-                                border: "1px solid red",
-                                marginTop: "5px",
-                                padding: "7px",
-                              }}
+                             style={{
+                      borderTop: "3px solid #3c8dbc",
+                      padding: "28px",
+                      background: "white",
+                      boxShadow: "1px 1px 2px 1px grey",
+                      borderDownRadius: "2px",
+                      marginTop:"20px"
+                    }}
                             >
                               <div>
                                 <h4 className="text-center mt-2 mb-3">
@@ -703,11 +731,15 @@ const ShowLetter2 = (props) => {
                                 setReasonOfRejection(event.target.value)
                               }
                             ></textarea>
+                         
                           </div>
+                          
                         )}
+                        <br />
                         <Button type="submit" onClick={handleSubmit}>Submit</Button>
                       </Col>
                     </Row>
+                    </div>
                   </form>
                 </div>
               </Col>

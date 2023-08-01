@@ -66,7 +66,7 @@ const PendingReportsList = () => {
 
   return (
     <>
-      <Container fluid >
+      <Container fluid style={{ background: "#ecf0f5" }}>
         <Row>
           <Col md={12} >
             <Row>

@@ -106,7 +106,7 @@ console.log(location?.state?.userDataTwo?.order_count);
 console.log(tableData?.[0]?.order_count);
   return (
     <>
-      <Container fluid style={{backgroundImage:'url("/Images/image_admin_bg.jpg")'}}>
+      <Container fluid style={{ background: "#ecf0f5" }}>
         <Row>
           <Col md={12} >
             <Row>
