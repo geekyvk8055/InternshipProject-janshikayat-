@@ -255,7 +255,7 @@ const ShowLetter2 = (props) => {
           <Col md={12}>
             <Row>
               <Col
-                md={2}
+                md={12}
                 style={{
                   background: "#eaf9ff",
                   border: "1px solid grey",
@@ -290,7 +290,7 @@ const ShowLetter2 = (props) => {
                 <hr />
               </Col>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-              <Col md={9} >
+              <Col md={12} >
                 <div>
                   <form>
                     <div class="mb-3 " style={{

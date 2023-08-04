@@ -45,6 +45,11 @@ const Action_PendingLettersByDepartment = (props) => {
   const [UploadFile, setUploadFile] = useState("");
   const [statusLetter, setStatusLetter] = useState("");
   const [forwordLetter, setForwordLetter] = useState("");
+  const [cat_list, setCat_list] = useState([]);
+  const [selectedCat_List, setSelected_Cat_List] = useState("");
+  const [no_need_action,setNo_Need_Action] = useState("");
+  const [actionDate, setActionDate] = useState("");
+
 
   //fetching basedepartment
 
@@ -143,6 +148,22 @@ const Action_PendingLettersByDepartment = (props) => {
     fetchemployee_category();
   }, [selectedSection]);
 
+
+
+
+  useEffect(() => {
+    const category_list = async () => {
+      if (no_need_action) {
+        const response = await axios.get(
+          "https://localhost:44333/api/ComplaintDetailTbl/getddlcatlist"
+        );
+        setCat_list(response?.data?.table);
+        
+      }
+    };
+    category_list();
+  }, [no_need_action]);
+
   //   useEffect(() => {
   //     // Fetch data based on the selected radio button
 
@@ -180,6 +201,8 @@ const Action_PendingLettersByDepartment = (props) => {
       setShowAccept(false);
     }
   }, [selectedOption]);
+  const currentDateTime = new Date(); 
+  console.log(currentDateTime.toLocaleString());
 
   const currentDate = new Date();
   const day = currentDate.getDate();
@@ -196,60 +219,36 @@ const Action_PendingLettersByDepartment = (props) => {
 
     try {
       const response = await axios.post(
-        `https://localhost:44333/api/ComplaintDetailTbl/updatecomplaintstatusaction/${location?.state?.complaintId}`,
+        `https://localhost:44333/api/ForwardLetter/postforwardletter`,
         {
-          counter_id: "",
-          district_id: selectedDistrict,
-          year: 2023,
-          name: tableData?.[0]?.name,
-          address: tableData?.[0]?.address,
-          subject: tableData?.[0]?.subject,
-          remarks: remark,
-          officer_id: "",
-          transferred: "",
-          user_id: selectedEmployeeCatPost,
-          forworded_district: selectedDistrict,
-          date_of_jandarshan: "2023-07-11T11:35:15.892Z",
-          applicant_district: tableData?.[0]?.applicntDistrictID,
-          no_use_department_code: selectedBasedepartment,
-          other: "",
-          category: tableData?.[0]?.category,
-          updated: "",
-          app_category_id: "",
-          counter_location_code: "",
-          applicant_mobile: "",
-          country_code: "91",
-          state_code: "22",
-          file_uploaded: "",
-          reffered_by: "",
-          application_sub_category: "",
-          applicant_category: "",
-          registration_number: "",
-          status: "",
-          reason_of_rejection: ReasonOfRejection,
-          complaint_acceptance_date: "2023-07-11T11:35:15.892Z",
-          complaint_complitance_date: "2023-07-11T11:35:15.892Z",
-          base_dept_code: selectedBasedepartment,
-          sub_dept_code: "",
-          district_code: selectedDistrict,
-          office_level: selectedOfficelevel,
-          office_category: selectedOfficecategory,
-          office_code: selectedOffice,
-          section_code: selectedSection,
-          designation_code: selectedEmployeeCatPost,
-          entry_date: "2023-07-11T11:35:15.892Z",
-          counter_location: "",
-          counter_code: "",
-          user_code: selectedEmployeeCatPost,
-          action_id: "",
-          action_date: "2023-07-11T11:35:15.892Z",
-          app_sub_category: "",
-          id: "",
-          action: "",
-          marked: "",
-          no_use_officer_id: "",
-          file_number: "",
-          action_type: "",
+          transaction_code: "001",
+          f_country_code: "91",
+          f_state_code: location?.state?.stateCode,
+          f_base_dept_code: location?.state?.baseDeptCode,
+          f_sub_dept_code: "",
+          f_office_category_code: location?.state?.officeCategory,
+          f_office_level_code: location?.state?.officeLevel,
+          f_office_dist_id: location?.state?.districtID,
+          f_office_code: location?.state?.officeCode,
+          f_section_code: "0",
+          f_designation_code: location?.state?.designationCode,
+          f_designation_number: "",
+          f_date: location?.state?.entryDate,
+          r_country_code: "91",
+          r_state_code: "22",
+          r_base_dept_code: selectedBasedepartment,
+          r_sub_dept_code: "",
+          r_office_category_post: selectedOfficecategory,
+          r_office_level_code: selectedOfficelevel,
+          r_office_dist_code: selectedDistrict,
+          r_office_code: selectedOffice,
+          r_section_code: selectedSection,
+          r_designation_code: "",
+          r_designation_no: "",
+          r_date: actionDate,
+          entry_date: actionDate,
+          user_code: "",
+          isprint: ""
         }
       );
       // console.log({datafromapi});
@@ -258,7 +257,7 @@ const Action_PendingLettersByDepartment = (props) => {
       console.log(error); // handle error
     }
   };
-  console.log(location?.state?.complaintId);
+  console.log("hello",location);
   return (
     <>
       <Container fluid style={{ background: "#ecf0f5" }}>
@@ -355,7 +354,7 @@ const Action_PendingLettersByDepartment = (props) => {
                             <br />
                           </Col>
                           <Col>
-                            <pre> दिनांक : {formattedDate}</pre>
+                            <pre>जावक दिनांक : {formattedDate}</pre>
                             <br />
                           </Col>
                         </Row>
@@ -472,8 +471,8 @@ const Action_PendingLettersByDepartment = (props) => {
                             <input
                               id="dob"
                               type="date"
-                              value={dob}
-                              onChange={(event) => setDob(event.target.value)}
+                              value={actionDate}
+                              onChange={(event) => setActionDate(event.target.value)}
                               required
                             />
                           </Col>
@@ -483,9 +482,11 @@ const Action_PendingLettersByDepartment = (props) => {
                               <label>
                                 <input
                                   type="checkbox"
-                                  checked={remark}
+                                  name="check"
+                                  value="Y"
+                                  checked = {no_need_action === "Y"}
                                   onChange={(event) =>
-                                    setRemark(event.target.value)
+                                    setNo_Need_Action(event.target.value)
                                   }
                                 />
                                 &nbsp;<b>कार्यवाही की आवश्यकता नहीं </b>
@@ -499,16 +500,17 @@ const Action_PendingLettersByDepartment = (props) => {
                             <div>
                               <Form.Select
                                 class="form-control"
-                                value={special}
+                                value={selectedCat_List}
                                 onChange={(event) =>
-                                  setSpecial(event.target.value)
+                                  setSelected_Cat_List(event.target.value)
                                 }
                               >
-                                <option value="no" selected>
+                                <option  selected>
                                   Select
                                 </option>
-
-                                <option value="yes">हाँ</option>
+                                {cat_list.map ((cat) =>( 
+                                <option value={cat.name}>{cat.name}</option>
+                                ))}
                               </Form.Select>
                             </div>
                           </Col>
@@ -518,13 +520,14 @@ const Action_PendingLettersByDepartment = (props) => {
                             <textarea
                               rows={5} // You can adjust the number of visible rows here
                               cols={40} // You can adjust the number of visible columns here
-                              value={action_detail}
+                              value={selectedCat_List}
+
                               onChange={(event) =>
-                                setAction_Detail(event.target.value)
+                                setSelected_Cat_List(event.target.value)
                               }
                             />
                             <p className="text-danger">
-                              बचे हुए अक्षर : {1000 - action_detail.length}
+                              बचे हुए अक्षर : {1000 - selectedCat_List.length}
                             </p>
                           </Col>
                         </Row>

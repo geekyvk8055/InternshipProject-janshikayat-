@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const ShowLetter = () => {
   const [tableData, setTableData] = useState([]);
-  const [selectedOption, setSelectedOption] = useState({});
+  const [selectedOption, setSelectedOption] = useState("P");
   const test = "hello";
   const navigate = useNavigate();
 
@@ -34,6 +34,7 @@ const ShowLetter = () => {
         })
         .catch((error) => {
           console.error("Error fetching pending data:", error);
+          
         });
     } else if (selectedOption === "A") {
       axios
@@ -55,16 +56,16 @@ const ShowLetter = () => {
       <Container fluid style={{ background: "#ecf0f5" }}>
         <Row>
           <Col md={12}>
-            <Row>
-              <Col
-                md={2}
+            <Row> 
+            <Col
+                md={12}
                 style={{
                   background: "#eaf9ff",
                   border: "1px solid grey",
                   boxShadow: "1px 1px 5px 3px grey",
                 }}
               >
-                <div style={{}}>
+                <div >
                   <div
                     style={{
                       marginTop: "25px",
@@ -100,8 +101,9 @@ const ShowLetter = () => {
                   <br />
                 </div>
               </Col>
-              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-              <Col md={9}>
+             
+              {/*&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;*/}
+              <Col md={12}>
                 <form>
                 <div style={{
                       marginTop:'25px',
@@ -158,6 +160,7 @@ const ShowLetter = () => {
                       checked={selectedOption === "P"}
                       onChange={(event) =>
                         setSelectedOption(event.target.value)
+                      
                       }
                     />{" "}
                     <label>विचाराधीन(प्रेषण हेतु )</label>

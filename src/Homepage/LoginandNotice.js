@@ -98,7 +98,7 @@ const Reports = () => {
         window.scrollTo(0, 0);
         console.log('Login successful!');
         navigate('/getLogin');
-      } else if (password === 'vinod' && userDataTwo?.userid === username) {
+      } else if (userDataTwo?.pwd === password && userDataTwo?.userid === username) {
         Swal.fire({
           icon: 'success',
           title: 'Login successful!',
